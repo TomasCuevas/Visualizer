@@ -1,3 +1,14 @@
+import { Routes, Route } from "react-router-dom";
+
+//* pages *//
+import { HomePage } from "./pages";
+
 export const App = () => {
-  return <div>App</div>;
+  return (
+    <>
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+      </Routes>
+    </>
+  );
 };
