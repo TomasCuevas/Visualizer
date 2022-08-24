@@ -8,7 +8,7 @@
     "preview": "vite preview",
     "co": "sui-mono commit",
     "check": "sui-mono check",
-    "release": "sui-mono release"
+    "rel": "sui-mono release"
   },
   "config": {
     "sui-mono": {
