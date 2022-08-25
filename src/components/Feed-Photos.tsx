@@ -9,7 +9,7 @@ export const FeedPhotos = () => {
 
   return (
     <main className="min-h-[calc(100vh_-_80px)] w-screen">
-      <section className="mt-7 flex flex-col gap-10 px-[5%]">
+      <section className="mt-5 flex flex-col gap-10 px-[5%]">
         {!isLoading &&
           photos.map((photo) => <FeedPhotoCard key={photo.id} {...photo} />)}
         <button onClick={() => fetchNextPage()}>More photos</button>

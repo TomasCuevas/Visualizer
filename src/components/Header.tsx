@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 
 export const Header = () => {
   return (
-    <header className="flex h-[80px] w-screen items-center gap-5 bg-background px-[5%]">
+    <header className="flex h-[60px] w-screen items-center gap-5 bg-background px-[5%]">
       <Link to="/">
         <span>
           <img

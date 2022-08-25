@@ -15,7 +15,7 @@ export const FeedPhotoCard = ({
 
   return (
     <article className="w-full">
-      <header className="mb-1 flex h-[40px] gap-2">
+      <header className="mb-1 flex h-[40px] items-center gap-2">
         <img
           src={large}
           alt="profile image"
