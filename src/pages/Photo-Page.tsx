@@ -12,16 +12,14 @@ export const PhotoPage = () => {
   const { photo, isLoading, status } = useFetchPhoto(id!);
 
   if (status === "loading") {
+    window.scrollTo(0, 0);
+
     return (
       <>
         <Header />
       </>
     );
   }
-
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  });
 
   return (
     <>
