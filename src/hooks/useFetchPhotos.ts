@@ -14,25 +14,19 @@ interface Returns {
 }
 
 export const useFetchPhotos = (): Returns => {
-  const [photos, setPhotos] = useState<RootObject[]>([]);
-  const [page, setPage] = useState<number>(1);
   const { data, status, isLoading, fetchNextPage } = useInfiniteQuery(
     ["photos"],
     getPhotos,
     {
-      getNextPageParam: () => page,
+      getNextPageParam: (lastPage, page) => {
+        return page.length + 1;
+      },
     }
   );
 
-  useEffect(() => {
-    if (data?.pages && status === "success") {
-      const newPhotos: RootObject[] = [];
-      data?.pages.forEach((photosArray) => newPhotos.push(...photosArray));
-
-      setPhotos(newPhotos);
-      setPage(page + 1);
-    }
-  }, [data]);
+  const photos = data?.pages.reduce((prevPhotos, page) =>
+    prevPhotos.concat(page)
+  );
 
   return {
     // properties

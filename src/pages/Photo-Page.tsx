@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import { useParams } from "react-router-dom";
 
 //* components *//
@@ -9,7 +8,7 @@ import { useFetchPhoto } from "../hooks";
 
 export const PhotoPage = () => {
   const { id } = useParams();
-  const { photo, isLoading, status } = useFetchPhoto(id!);
+  const { photo, status } = useFetchPhoto(id!);
 
   if (status === "loading") {
     window.scrollTo(0, 0);
