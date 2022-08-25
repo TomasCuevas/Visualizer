@@ -17,7 +17,7 @@ export const useFetchPhotos = (): Returns => {
   const [photos, setPhotos] = useState<RootObject[]>([]);
   const [page, setPage] = useState<number>(1);
   const { data, status, isLoading, fetchNextPage } = useInfiniteQuery(
-    ["pictures"],
+    ["photos"],
     getPhotos,
     {
       getNextPageParam: () => page,
