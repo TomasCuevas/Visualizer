@@ -6,10 +6,16 @@ import { getEnvironments } from "../helpers";
 //* environments *//
 const { baseurl, access_key } = getEnvironments();
 
-export const getPhotos = async ({ pageParam = 1 }) => {
+export const getUserPhotos = async ({
+  pageParam = 1,
+  username,
+}: {
+  pageParam: number;
+  username: string;
+}) => {
   try {
     const { data } = await axios.get(
-      `${baseurl}/photos/?client_id=${access_key}&page=${pageParam}&per_page=20`
+      `${baseurl}/users/${username}/photos/?client_id=${access_key}&page=${pageParam}&per_page=20`
     );
 
     return data;
