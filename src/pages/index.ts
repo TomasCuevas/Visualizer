@@ -1,2 +1,2 @@
 export * from "./Home-Page";
-export * from "./Photo-Page";
+export * from "./Select-Photo-Page";
