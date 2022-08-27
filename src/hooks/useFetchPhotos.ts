@@ -1,4 +1,3 @@
-import { useEffect, useState } from "react";
 import { useInfiniteQuery } from "react-query";
 
 //* interfaces *//
@@ -8,8 +7,9 @@ import { RootObject } from "../interfaces";
 import { getPhotos } from "../services";
 
 interface Returns {
-  photos: RootObject[];
   isLoading: boolean;
+  photos: RootObject[];
+  status: "idle" | "error" | "loading" | "success";
   fetchNextPage: () => {};
 }
 
@@ -30,8 +30,9 @@ export const useFetchPhotos = (): Returns => {
 
   return {
     // properties
-    photos,
     isLoading,
+    photos,
+    status,
 
     // methods
     fetchNextPage,

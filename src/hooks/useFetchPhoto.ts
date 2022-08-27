@@ -7,22 +7,27 @@ import { RootObject } from "../interfaces/photos-interfaces";
 import { getPhoto } from "../services";
 
 interface Returns {
-  photo: RootObject;
   isLoading: boolean;
+  photo: RootObject;
   status: "idle" | "error" | "loading" | "success";
+  refetch: () => {};
 }
 
 export const useFetchPhoto = (id: string): Returns => {
   const {
     data: photo,
-    status,
     isLoading,
-  } = useQuery(["photo"], () => getPhoto(id));
+    refetch,
+    status,
+  } = useQuery(["photo"], () => getPhoto(id), {});
 
   return {
     // properties
-    photo,
     isLoading,
+    photo,
     status,
+
+    // methods
+    refetch,
   };
 };
