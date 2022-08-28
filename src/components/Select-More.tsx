@@ -25,12 +25,11 @@ export const SelectMore = ({ username }: { username: string }) => {
       <span className="mx-auto block max-w-[1300px] text-lg font-light tracking-[2px] text-darklighttext">
         Mas fotos del usuario
       </span>
-      <div
-        className={`mx-auto grid w-full max-w-[820px] grid-cols-2  gap-3 py-6 lg:max-w-[1300px] lg:grid-cols-3`}
-      >
-        {columns.map((column, index) => (
-          <SelectMoreColumn key={index} photos={column} />
-        ))}
+      <div className="mx-auto grid w-full max-w-[820px] grid-cols-2 gap-3 py-6 lg:max-w-[1300px] lg:grid-cols-3">
+        {columns.length > 0 &&
+          columns.map((column, index) => (
+            <SelectMoreColumn key={index} photos={column} />
+          ))}
       </div>
     </div>
   );
