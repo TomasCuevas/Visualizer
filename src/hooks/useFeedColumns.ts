@@ -31,22 +31,20 @@ export const useFeedColumns = ({ elements, columnsProps }: Props): Returns => {
     setColumns(newColumns);
   }, [elements, nColumns]);
 
-  useEffect(() => {
-    columnsProps.forEach((col) => {
-      if (window.innerWidth >= col.min_width)
-        setNColumns(col.columnsNumber - 1);
+  const eventListener = () => {
+    columnsProps.forEach((col, index) => {
+      if (window.innerWidth >= col.min_width) {
+        if (!columnsProps[index + 1]) return setNColumns(col.columnsNumber - 1);
+        if (window.innerWidth < columnsProps[index + 1].min_width)
+          return setNColumns(col.columnsNumber - 1);
+      }
     });
 
-    window.addEventListener(
-      "resize",
-      () => {
-        columnsProps.forEach((col) => {
-          if (window.innerWidth >= col.min_width)
-            setNColumns(col.columnsNumber - 1);
-        });
-      },
-      false
-    );
+    window.addEventListener("resize", eventListener);
+  };
+
+  useEffect(() => {
+    eventListener();
   }, []);
 
   return {
