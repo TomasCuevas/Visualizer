@@ -3,10 +3,10 @@ import { Link } from "react-router-dom";
 //* interfaces *//
 import { RootObject } from "../interfaces/photos-interfaces";
 
-export const FeedPhotoCard = ({
-  user,
-  urls: { full, small },
+export const FeedHomeCard = ({
   id,
+  urls: { full, small },
+  user,
 }: RootObject) => {
   const {
     name,
@@ -14,8 +14,8 @@ export const FeedPhotoCard = ({
   } = user;
 
   return (
-    <article className="w-full">
-      <header className="mb-1 flex h-[40px] items-center gap-2">
+    <article className="flex  flex-col items-center">
+      <header className="mb-1 mr-auto flex h-[40px] items-center gap-2 sm:hidden">
         <img
           src={large}
           alt="profile image"

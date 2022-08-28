@@ -1,11 +1,11 @@
 //* components *//
-import { FeedPhotos, Header } from "../components";
+import { FeedHome, Header } from "../components";
 
 export const HomePage = () => {
   return (
     <>
       <Header />
-      <FeedPhotos />
+      <FeedHome />
     </>
   );
 };
