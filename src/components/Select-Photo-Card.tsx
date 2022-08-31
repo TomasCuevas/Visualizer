@@ -23,7 +23,7 @@ export const SelectPhotoCard = ({
 
   return (
     <article className="mx-auto w-full py-3">
-      <header className="sticky top-0 z-20 flex h-[60px] items-center gap-2 bg-white px-[10px] xl:h-[70px]">
+      <header className="sticky top-0 z-50 flex h-[60px] items-center gap-2 bg-white px-[10px] xl:h-[70px]">
         <div className="mx-auto flex w-full max-w-[1300px] items-center gap-2">
           <img
             src={large}

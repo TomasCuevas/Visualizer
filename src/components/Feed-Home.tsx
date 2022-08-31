@@ -34,7 +34,7 @@ export const FeedHome = () => {
             <FeedHomeColumn key={index} photos={column} />
           ))}
       </section>
-      <div ref={ref} className="absolute left-0 bottom-0 h-[800px] w-full" />
+      <div ref={ref} className="absolute left-0 bottom-0 h-[4000px] w-full" />
     </main>
   );
 };

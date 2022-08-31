@@ -4,7 +4,7 @@ export const Header = () => {
   const navigate = useNavigate();
 
   return (
-    <header className="sticky top-0 z-10 flex h-[60px] w-full items-center gap-5 bg-background px-[10px] xl:h-[70px]">
+    <header className="sticky top-0 z-30 flex h-[60px] w-full items-center gap-5 bg-background px-[10px] xl:h-[70px]">
       <Link
         onClick={() => window.scrollTo(0, 0)}
         to="/"
