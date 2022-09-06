@@ -19,7 +19,7 @@ export const useFetchPhoto = (id: string): Returns => {
     isLoading,
     refetch,
     status,
-  } = useQuery(["photo"], () => getPhoto(id), {});
+  } = useQuery(["photo"], async () => await getPhoto(id));
 
   return {
     // properties

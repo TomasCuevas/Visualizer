@@ -10,7 +10,7 @@ export const getUserPhotos = async ({
   pageParam = 1,
   username,
 }: {
-  pageParam: number;
+  pageParam?: number;
   username: string;
 }) => {
   try {

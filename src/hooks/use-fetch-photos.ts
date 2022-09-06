@@ -1,7 +1,7 @@
 import { useInfiniteQuery } from "react-query";
 
 //* interfaces *//
-import { RootObject } from "../interfaces";
+import { RootObject } from "../interfaces/photos-interfaces";
 
 //* services *//
 import { getPhotos } from "../services";
@@ -16,7 +16,7 @@ interface Returns {
 export const useFetchPhotos = (): Returns => {
   const { data, status, isLoading, fetchNextPage } = useInfiniteQuery(
     ["photos"],
-    getPhotos,
+    async ({ pageParam }) => await getPhotos({ pageParam }),
     {
       getNextPageParam: (lastPage, page) => {
         return page.length + 1;
@@ -24,14 +24,10 @@ export const useFetchPhotos = (): Returns => {
     }
   );
 
-  const photos = data?.pages.reduce((prevPhotos, page) =>
-    prevPhotos.concat(page)
-  );
-
   return {
     // properties
     isLoading,
-    photos,
+    photos: data?.pages.reduce((prevPhotos, page) => prevPhotos.concat(page)),
     status,
 
     // methods

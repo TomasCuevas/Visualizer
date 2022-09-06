@@ -1,7 +1,7 @@
 import { useInfiniteQuery } from "react-query";
 
 //* interfaces *//
-import { RootObject } from "../interfaces";
+import { RootObject } from "../interfaces/photos-interfaces";
 
 //* services *//
 import { getUserPhotos } from "../services";
