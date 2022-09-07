@@ -33,9 +33,9 @@ export const SelectPhotoCard = ({
           <span className="text-base font-normal text-darklighttext">
             {name}
           </span>
-          <div className="ml-auto rounded-full border border-decoratedarklight py-2 px-4">
+          <div className="group ml-auto cursor-pointer rounded-full border border-background py-2 px-5 transition-all duration-300 hover:bg-background">
             <span
-              className="text-darklighttext"
+              className="text-background transition-all duration-300 group-hover:font-bold group-hover:text-lighttext"
               onClick={() => saveAs(full || small, name)}
             >
               Descargar
