@@ -1,7 +1,7 @@
 {
   "name": "visualizer",
   "private": false,
-  "version": "0.15.0",
+  "version": "0.16.0",
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
@@ -26,6 +26,7 @@
     "file-saver": "2.0.5",
     "react": "18.0.0",
     "react-dom": "18.0.0",
+    "react-icons": "4.4.0",
     "react-intersection-observer": "9.4.0",
     "react-query": "3.39.2",
     "react-router-dom": "6.3.0"
