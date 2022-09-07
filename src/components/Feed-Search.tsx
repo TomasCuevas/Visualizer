@@ -1,14 +1,14 @@
 import { useEffect } from "react";
 import { useInView } from "react-intersection-observer";
 
+//* hooks *//
+import { useFeedColumns, useFetchSearchPhotos } from "../hooks";
+
 //* components *//
 import { FeedHomeColumn } from "./";
 
-//* hooks *//
-import { useFeedColumns, useFetchPhotos } from "../hooks";
-
-export const FeedHome = () => {
-  const { photos, status, fetchNextPage } = useFetchPhotos();
+export const FeedSearch = ({ search }: { search: string }) => {
+  const { status, photos, fetchNextPage } = useFetchSearchPhotos(search);
   const { columns } = useFeedColumns({
     elements: photos,
     columnsProps: [
@@ -29,7 +29,7 @@ export const FeedHome = () => {
   }, [inView]);
 
   return (
-    <main className="relative min-h-[calc(100vh_-_80px)] w-full">
+    <main className="w-main relative min-h-[calc(100vh_-_80px)]">
       <section className="mx-auto grid w-full max-w-[820px] grid-cols-1 gap-3 px-[10px] py-6 sm:grid-cols-2 lg:max-w-[1300px] lg:grid-cols-3">
         {status === "success" &&
           columns.map((column, index) => (

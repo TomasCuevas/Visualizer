@@ -2,17 +2,16 @@ import { Link } from "react-router-dom";
 
 //* interfaces *//
 import { RootObject } from "../interfaces/photos-interfaces";
+import { Result } from "../interfaces/search-interfaces";
 
 export const FeedHomeCard = ({
   id,
   urls: { full, small },
-  user,
-}: RootObject) => {
-  const {
+  user: {
     name,
     profile_image: { large },
-  } = user;
-
+  },
+}: RootObject | Result) => {
   return (
     <article className="group relative flex  flex-col items-center">
       <header className="z-20 mb-1 mr-auto flex h-[40px] cursor-pointer items-center gap-2 transition-all duration-300 group-hover:opacity-100 sm:absolute sm:bottom-5 sm:left-5 sm:opacity-0">
