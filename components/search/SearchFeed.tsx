@@ -7,6 +7,7 @@ import { useCalcColumns, useFetchSearchPhotos } from "../../hooks";
 
 //* components *//
 import { FeedColumn } from "../feed";
+import { Loader } from "../ui";
 
 //* interface *//
 interface Props {
@@ -38,6 +39,7 @@ export const SearchFeed: React.FC<Props> = ({ search }) => {
         {columns.map((column, index) => (
           <FeedColumn key={index} photos={column} />
         ))}
+        <Loader loading={isLoading} />
         <div ref={ref} className="absolute left-0 bottom-0 h-[4000px] w-full" />
       </section>
     </>
