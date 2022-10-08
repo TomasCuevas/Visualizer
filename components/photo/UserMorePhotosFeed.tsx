@@ -3,9 +3,10 @@ import { useCalcColumns, useFetchUserPhotos } from "../../hooks";
 
 //* components *//
 import { FeedColumn } from "../feed";
+import { Loader } from "../ui";
 
 export const UserMorePhotosFeed = ({ username }: { username: string }) => {
-  const { photos } = useFetchUserPhotos(username);
+  const { photos, isLoading } = useFetchUserPhotos(username);
   const { columns } = useCalcColumns(
     [
       { columnsNumber: 2, min_width: 0 },
@@ -20,6 +21,7 @@ export const UserMorePhotosFeed = ({ username }: { username: string }) => {
         Mas fotos del usuario
       </span>
       <div className="mx-auto grid w-full max-w-[820px] grid-cols-2 gap-3 py-6 lg:max-w-[1300px] lg:grid-cols-3">
+        <Loader loading={isLoading} />
         {columns.map((column, index) => (
           <FeedColumn key={index} photos={column} />
         ))}
