@@ -13,7 +13,7 @@ const SearchPhotosPage: NextPage = () => {
 
   return (
     <PrincipalLayout
-      title="Search"
+      title={`${search} - Visualizer`}
       description="Pagina de busqueda - Visualizer"
     >
       <SearchFeed search={search} />

@@ -23,7 +23,7 @@ export const PhotoCard: React.FC<IPhoto> = ({
 
   return (
     <article className="mx-auto w-full py-3">
-      <header className="sticky top-0 z-50 flex h-[60px] items-center gap-2 bg-white px-[5%] xl:h-[70px]">
+      <header className="sticky top-0 z-50 flex h-[60px] items-center gap-2 bg-white px-[5%]">
         <div className="mx-auto flex w-full max-w-[1300px] items-center gap-2">
           <img
             src={large}
@@ -44,15 +44,17 @@ export const PhotoCard: React.FC<IPhoto> = ({
         </div>
       </header>
 
-      <picture>
-        <img
-          src={regular}
-          alt="photo"
-          className="mx-auto max-h-[calc(100vh_-_200px)] sm:px-[5%]"
-        />
-      </picture>
+      <main className="relative z-40 w-full bg-white">
+        <picture>
+          <img
+            src={regular}
+            alt="photo"
+            className="mx-auto max-h-[calc(100vh_-_200px)] sm:px-[5%]"
+          />
+        </picture>
+      </main>
 
-      <footer className="mx-auto flex max-w-[1300px] flex-col gap-7 px-[5%] py-5 xl:py-10">
+      <footer className="relative z-40 mx-auto flex max-w-[1300px] flex-col gap-7 bg-white px-[5%] py-5 xl:py-10">
         <div className="flex flex-col gap-2">
           <span>
             <p className="font-light text-gray-500">Visualizaciones</p>

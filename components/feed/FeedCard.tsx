@@ -39,22 +39,24 @@ export const FeedCard: React.FC<IPhoto> = ({
       )}
 
       <NextLink href={`/photo/${id}`} passHref>
-        <div>
-          <picture>
-            <img
-              src={small}
-              alt={`${name} photo`}
-              className="cursor-zoom-in rounded-3xl"
+        <a>
+          <div>
+            <picture>
+              <img
+                src={small}
+                alt={`${name} photo`}
+                className="cursor-zoom-in rounded-3xl"
+              />
+            </picture>
+            <div
+              className={
+                isInPhotoPage
+                  ? "absolute left-0 top-0 z-10 h-full w-full cursor-zoom-in rounded-3xl bg-black/40 opacity-0 transition-all duration-300 group-hover:opacity-100"
+                  : "left-0 top-0 z-10 h-full w-full cursor-zoom-in rounded-3xl bg-black/40 opacity-0 transition-all duration-300 sm:absolute sm:group-hover:opacity-100"
+              }
             />
-          </picture>
-          <div
-            className={
-              isInPhotoPage
-                ? "absolute left-0 top-0 z-10 h-full w-full cursor-zoom-in rounded-3xl bg-black/40 opacity-0 transition-all duration-300 group-hover:opacity-100"
-                : "left-0 top-0 z-10 h-full w-full cursor-zoom-in rounded-3xl bg-black/40 opacity-0 transition-all duration-300 sm:absolute sm:group-hover:opacity-100"
-            }
-          />
-        </div>
+          </div>
+        </a>
       </NextLink>
     </article>
   );
