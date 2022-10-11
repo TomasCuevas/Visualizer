@@ -25,7 +25,7 @@ export const Navbar: React.FC = () => {
   const { topic: topicQuery } = query;
 
   return (
-    <nav className="w-ful relative z-30 flex h-[55px] items-center justify-center overflow-hidden bg-white  px-[5%] lg:top-[60px]">
+    <nav className="w-ful relative z-30 flex h-[55px] items-center justify-center overflow-hidden bg-white  px-[5%]">
       <div
         className={
           showLeftArrow
@@ -59,7 +59,7 @@ export const Navbar: React.FC = () => {
                   className={
                     slug === topicQuery
                       ? "whitespace-nowrap text-sm font-normal text-black"
-                      : "whitespace-nowrap text-sm font-normal text-gray-500"
+                      : "whitespace-nowrap text-sm font-normal text-gray-400"
                   }
                 >
                   {topic}
