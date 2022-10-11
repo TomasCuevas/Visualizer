@@ -18,7 +18,7 @@ export const FormSearch: React.FC = () => {
   useEffect(() => {
     if (router.pathname === "/search") {
       const query = router.asPath.split("?")[1].split("=")[1];
-      setToSearch(query ? query : "");
+      setToSearch(query ? query.replaceAll("%20", " ") : "");
     }
   }, [router]);
 

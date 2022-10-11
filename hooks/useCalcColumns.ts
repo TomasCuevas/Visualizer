@@ -2,14 +2,14 @@
 import { useEffect, useState } from "react";
 
 //* interfaces *//
-interface Returns {
+interface Return {
   columns: [][];
 }
 
 export const useCalcColumns = (
   columnsProps: { min_width: number; columnsNumber: number }[],
   elements: any[]
-): Returns => {
+): Return => {
   const [columns, setColumns] = useState<[][]>([]);
   const [first, setFirst] = useState(true);
   const [previousElements, setPreviousElements] = useState<[][]>([]);

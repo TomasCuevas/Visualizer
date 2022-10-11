@@ -8,13 +8,13 @@ import { ISearch } from "../interfaces/seach";
 
 //* services *//
 
-interface Returns {
+interface Return {
   isLoading: boolean;
   photos: IPhoto[];
   getNextPage: () => void;
 }
 
-export const useFetchSearchPhotos = (search: string): Returns => {
+export const useFetchSearchPhotos = (search: string): Return => {
   const getKey = (pageIndex: number) => {
     return `${process.env.NEXT_PUBLIC_BASEURL_API}/search/photos/?client_id=${process.env.NEXT_PUBLIC_UNSPLASH_ACCESS_KEY}&page=${pageIndex}&per_page=30&query=${search}`;
   };

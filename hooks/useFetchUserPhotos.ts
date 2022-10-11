@@ -5,13 +5,13 @@ import useSWRInfinity from "swr/infinite";
 //* interfaces *//
 import { IPhoto } from "../interfaces/photos";
 
-interface Returns {
+interface Return {
   isLoading: boolean;
   photos: IPhoto[];
   getNextPage: () => void;
 }
 
-export const useFetchUserPhotos = (username: string): Returns => {
+export const useFetchUserPhotos = (username: string): Return => {
   const getKey = (pageIndex: number) => {
     return `${process.env.NEXT_PUBLIC_BASEURL_API}/users/${username}/photos/?client_id=${process.env.NEXT_PUBLIC_UNSPLASH_ACCESS_KEY}&page=${pageIndex}&per_page=30`;
   };
