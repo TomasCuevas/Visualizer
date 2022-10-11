@@ -5,7 +5,7 @@ import { FormSearch } from "./";
 
 export const Header: React.FC = () => {
   return (
-    <header className="sticky top-0 z-30 flex h-[50px] w-full items-center gap-5 bg-background px-[5%] lg:h-[60px]">
+    <header className="z-30 flex h-[50px] w-full items-center gap-5 bg-background px-[5%] lg:h-[60px]">
       <section className="flex w-full items-center gap-5">
         <NextLink href="/" passHref>
           <a>

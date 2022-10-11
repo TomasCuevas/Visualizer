@@ -1,7 +1,7 @@
 import Head from "next/head";
 
 //* components *//
-import { Header } from "../ui";
+import { Header, Navbar } from "../ui";
 
 interface Props {
   children: React.ReactNode;
@@ -23,6 +23,7 @@ export const PrincipalLayout: React.FC<Props> = ({
       </Head>
 
       <Header />
+      <Navbar />
 
       <main className="w-full">{children}</main>
     </>
