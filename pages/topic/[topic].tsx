@@ -8,6 +8,7 @@ import { TopicFeed, TopicHero } from "../../components/topic";
 
 //* utils *//
 import { getTopic } from "../../utils";
+import { useEffect } from "react";
 
 //* interfaces *//
 interface Props {
@@ -23,6 +24,8 @@ const TopicPage: NextPage<Props> = ({
   slug,
   title,
 }) => {
+  useEffect(() => {}, [title]);
+
   return (
     <PrincipalLayout title={`${title} | Visualizer`} description={description}>
       <TopicHero

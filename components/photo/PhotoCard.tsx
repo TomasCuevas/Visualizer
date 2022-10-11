@@ -4,6 +4,7 @@ import "dayjs/locale/es";
 
 //* interfaces *//
 import { IPhoto } from "../../interfaces/photos";
+import Image from "next/future/image";
 
 export const PhotoCard: React.FC<IPhoto> = ({
   created_at,
@@ -25,10 +26,13 @@ export const PhotoCard: React.FC<IPhoto> = ({
     <article className="mx-auto w-full py-3">
       <header className="sticky top-0 z-50 flex h-[60px] items-center gap-2 bg-white px-[5%]">
         <div className="mx-auto flex w-full max-w-[1300px] items-center gap-2">
-          <img
+          <Image
             src={large}
             alt="profile image"
             className="h-[40px] w-[40px] rounded-full"
+            height={0}
+            width={0}
+            sizes="40px"
           />
           <span className="text-base font-normal text-darklighttext">
             {name}
@@ -45,13 +49,15 @@ export const PhotoCard: React.FC<IPhoto> = ({
       </header>
 
       <main className="relative z-40 w-full bg-white">
-        <picture>
-          <img
-            src={regular}
-            alt="photo"
-            className="mx-auto max-h-[calc(100vh_-_200px)] sm:px-[5%]"
-          />
-        </picture>
+        <Image
+          src={regular}
+          alt="photo"
+          className="mx-auto max-h-[calc(100vh_-_200px)] w-screen object-contain sm:px-[5%] md:w-auto"
+          height="0"
+          width="0"
+          sizes="100%"
+          priority
+        />
       </main>
 
       <footer className="relative z-40 mx-auto flex max-w-[1300px] flex-col gap-7 bg-white px-[5%] py-5 xl:py-10">
@@ -68,20 +74,26 @@ export const PhotoCard: React.FC<IPhoto> = ({
         <div className="flex flex-col gap-2">
           {date && (
             <span className="flex items-center gap-3">
-              <img
+              <Image
                 src="/calendar.svg"
                 alt="calendar"
                 className="h-[14px] w-[14px]"
+                width={0}
+                height={0}
+                sizes="14px"
               />
               <span className="text-sm text-darklighttext">{`Publicado el ${date}`}</span>
             </span>
           )}
           {cameraName && (
             <span className="flex items-center gap-3">
-              <img
+              <Image
                 src="/camera.svg"
                 alt="camera"
                 className="h-[14px] w-[14px]"
+                width={0}
+                height={0}
+                sizes="14px"
               />
               <span className="text-sm text-darklighttext">{cameraName}</span>
             </span>

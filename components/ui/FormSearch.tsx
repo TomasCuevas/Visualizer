@@ -24,7 +24,7 @@ export const FormSearch: React.FC = () => {
 
   return (
     <form
-      className="flex h-[35px] w-full items-center gap-3 rounded-full bg-decoratelight px-5"
+      className="flex h-[35px] w-full items-center gap-3 rounded-full bg-decoratelight px-5 sm:h-[40px]"
       autoComplete="off"
       onSubmit={onSearch}
     >

@@ -1,21 +1,22 @@
 import NextLink from "next/link";
+import Image from "next/future/image";
 
 //* components *//
 import { FormSearch } from "./";
 
 export const Header: React.FC = () => {
   return (
-    <header className="z-30 flex h-[50px] w-full items-center gap-5 bg-background px-[5%] lg:h-[60px]">
+    <header className="flex h-[60px] w-full items-center gap-5 bg-background px-[5%] lg:h-[70px]">
       <section className="flex w-full items-center gap-5">
         <NextLink href="/" passHref>
           <a>
-            <div className="cursor-pointer">
-              <img
-                alt="logo"
-                className="h-[40px] w-[40px]"
-                src="/visualizer.svg"
-              />
-            </div>
+            <Image
+              alt="logo"
+              className="h-[40px] w-[40px] cursor-pointer"
+              height="0"
+              width="0"
+              src="/visualizer.svg"
+            />
           </a>
         </NextLink>
         <FormSearch />
