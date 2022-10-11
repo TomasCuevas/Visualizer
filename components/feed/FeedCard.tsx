@@ -6,7 +6,7 @@ import { IPhoto } from "../../interfaces/photos";
 
 export const FeedCard: React.FC<IPhoto> = ({
   id,
-  urls: { small },
+  urls: { regular },
   user: {
     name,
     profile_image: { large },
@@ -43,7 +43,7 @@ export const FeedCard: React.FC<IPhoto> = ({
           <div>
             <picture>
               <img
-                src={small}
+                src={regular}
                 alt={`${name} photo`}
                 className="cursor-zoom-in rounded-3xl"
               />

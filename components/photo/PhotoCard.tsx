@@ -58,11 +58,11 @@ export const PhotoCard: React.FC<IPhoto> = ({
         <div className="flex flex-col gap-2">
           <span>
             <p className="font-light text-gray-500">Visualizaciones</p>
-            <span className="font">{views}</span>
+            <span className="font">{views.toLocaleString("en-US")}</span>
           </span>
           <span>
             <p className="font-light text-gray-500">Descargas</p>
-            <span className="font">{downloads}</span>
+            <span className="font">{downloads.toLocaleString("en-US")}</span>
           </span>
         </div>
         <div className="flex flex-col gap-2">
