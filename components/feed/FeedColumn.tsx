@@ -10,7 +10,7 @@ import { IPhoto } from "../../interfaces/photos";
 
 interface Props {
   photos: IPhoto[];
-  getNextPage: any;
+  getNextPage?: any;
 }
 
 export const FeedColumn: React.FC<Props> = ({ photos, getNextPage }) => {
@@ -19,7 +19,7 @@ export const FeedColumn: React.FC<Props> = ({ photos, getNextPage }) => {
   });
 
   useEffect(() => {
-    if (inView) getNextPage();
+    if (inView && getNextPage) getNextPage();
   }, [inView]);
 
   return (
@@ -30,7 +30,7 @@ export const FeedColumn: React.FC<Props> = ({ photos, getNextPage }) => {
       <div className="relative w-full">
         <div
           ref={ref}
-          className="absolute left-0 bottom-0 h-[500px] w-full sm:h-[1500px]"
+          className="absolute left-0 bottom-0 h-[700px] w-full sm:h-[2000px]"
         />
       </div>
     </div>
