@@ -1,16 +1,17 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { useEffect, useState } from "react";
+import { Dispatch, SetStateAction, useEffect, useState } from "react";
 
 //* interfaces *//
 interface Return {
-  columns: [][];
+  columns: any[][];
 }
 
 export const useCalcColumns = (
   columnsProps: { min_width: number; columnsNumber: number }[],
-  elements: any[]
+  elements: any[],
+  setIsLoading: Dispatch<SetStateAction<boolean>>
 ): Return => {
-  const [columns, setColumns] = useState<[][]>([]);
+  const [columns, setColumns] = useState<any[][]>([]);
   const [first, setFirst] = useState(true);
   const [previousElements, setPreviousElements] = useState<[][]>([]);
 
@@ -31,20 +32,61 @@ export const useCalcColumns = (
     });
 
     let pointer: number = 0;
-    const newColumns: any = [];
+
+    if (columns.flat().length === elements.length / 2) {
+      elements.forEach((photo, index) => {
+        if (index + 1 <= columns.flat().length) {
+          pointer++;
+          if (pointer > column) pointer = 0;
+
+          return;
+        }
+
+        console.log(index);
+
+        setColumns((prev) => {
+          if (prev[pointer]?.length >= elements.length / (column + 1)) {
+            pointer++;
+            if (pointer > column) pointer = 0;
+
+            return prev;
+          }
+
+          prev[pointer] = prev[pointer] ? [...prev[pointer], photo] : [photo];
+
+          pointer++;
+          if (pointer > column) pointer = 0;
+
+          return prev;
+        });
+      });
+
+      setIsLoading(false);
+      return;
+    }
 
     if (elements?.length > 0) {
       elements.forEach((photo) => {
-        newColumns[pointer] = newColumns[pointer]
-          ? [...newColumns[pointer], photo]
-          : [photo];
+        setColumns((prev) => {
+          if (prev[pointer]?.length >= elements.length / (column + 1)) {
+            pointer++;
+            if (pointer > column) pointer = 0;
 
-        pointer++;
-        if (pointer > column) pointer = 0;
+            return prev;
+          }
+
+          prev[pointer] = prev[pointer] ? [...prev[pointer], photo] : [photo];
+
+          pointer++;
+          if (pointer > column) pointer = 0;
+
+          return prev;
+        });
       });
     }
 
-    setColumns(newColumns);
+    setIsLoading(false);
+    return;
   };
 
   useEffect(() => {
