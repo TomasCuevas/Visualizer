@@ -1,7 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
-// import { useEffect } from "react";
-// import { useInView } from "react-intersection-observer";
-
 //* components *//
 import { Loader } from "../ui";
 import { FeedColumn } from ".";
@@ -11,14 +7,6 @@ import { useFetchPhotos } from "../../hooks";
 
 export const MainFeed: React.FC = () => {
   const { photos, isLoading, getNextPage } = useFetchPhotos();
-
-  // const { ref, inView } = useInView({
-  //   threshold: 0.1,
-  // });
-
-  // useEffect(() => {
-  //   if (inView && !isLoading) getNextPage();
-  // }, [inView]);
 
   return (
     <>

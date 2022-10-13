@@ -7,7 +7,7 @@ import { IPhoto } from "../../interfaces/photos";
 
 export const FeedCard: React.FC<IPhoto> = ({
   id,
-  urls: { regular },
+  urls: { small },
   user: {
     name,
     profile_image: { large },
@@ -45,13 +45,13 @@ export const FeedCard: React.FC<IPhoto> = ({
       <NextLink href={`/photo/${id}`} passHref>
         <a className="relative flex min-w-full">
           <Image
-            src={regular}
+            src={small}
             alt={`${name} photo`}
             className="relative h-auto min-w-full cursor-zoom-in rounded-3xl object-cover"
             height="0"
             width="0"
             sizes="100%"
-            quality={20}
+            quality={80}
             priority
           />
           <div
