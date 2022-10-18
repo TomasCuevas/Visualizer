@@ -13,6 +13,7 @@ export const PhotoCard: React.FC<IPhoto> = ({
   urls: { full, regular },
   user,
   views,
+  location,
 }) => {
   const {
     name,
@@ -52,7 +53,7 @@ export const PhotoCard: React.FC<IPhoto> = ({
         <Image
           src={regular}
           alt="photo"
-          className="mx-auto max-h-[calc(100vh_-_200px)] w-screen object-contain sm:px-[5%] md:w-auto"
+          className="mx-auto max-h-[calc(100vh_-_220px)] w-screen object-contain sm:px-[5%] md:w-auto"
           height="0"
           width="0"
           sizes="100%"
@@ -72,32 +73,41 @@ export const PhotoCard: React.FC<IPhoto> = ({
           </span>
         </div>
         <div className="flex flex-col gap-2">
-          {date && (
-            <span className="flex items-center gap-3">
-              <Image
-                src="/calendar.svg"
-                alt="calendar"
-                className="h-[14px] w-[14px]"
-                width={0}
-                height={0}
-                sizes="14px"
-              />
-              <span className="text-sm text-darklighttext">{`Publicado el ${date}`}</span>
-            </span>
-          )}
-          {cameraName && (
-            <span className="flex items-center gap-3">
-              <Image
-                src="/camera.svg"
-                alt="camera"
-                className="h-[14px] w-[14px]"
-                width={0}
-                height={0}
-                sizes="14px"
-              />
-              <span className="text-sm text-darklighttext">{cameraName}</span>
-            </span>
-          )}
+          <span className={date ? "flex items-center gap-3" : "hidden"}>
+            <Image
+              src="/calendar.svg"
+              alt="calendar"
+              className="h-[22px] w-[22px]"
+              width={0}
+              height={0}
+              sizes="22px"
+            />
+            <span className="text-sm text-darklighttext">{`Publicado el ${date}`}</span>
+          </span>
+          <span className={cameraName ? "flex items-center gap-3" : "hidden"}>
+            <Image
+              src="/camera.svg"
+              alt="camera"
+              className="h-[22px] w-[22px]"
+              width={0}
+              height={0}
+              sizes="22px"
+            />
+            <span className="text-sm text-darklighttext">{cameraName}</span>
+          </span>
+          <span
+            className={location.name ? "flex items-center gap-3" : "hidden"}
+          >
+            <Image
+              src="/location.svg"
+              alt="camera"
+              className="h-[22px] w-[22px]"
+              width={0}
+              height={0}
+              sizes="22px"
+            />
+            <span className="text-sm text-darklighttext">{location.name}</span>
+          </span>
         </div>
       </footer>
     </article>

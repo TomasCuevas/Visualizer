@@ -1,4 +1,7 @@
-export const topics = [
+//* interface *//
+import { ITopics } from "../interfaces/topics";
+
+export const topics: ITopics[] = [
   { topic: "Comida & Bebida", url: "/topic/food-drink", slug: "food-drink" },
   {
     topic: "Eventos actuales",

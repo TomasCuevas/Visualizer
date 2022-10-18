@@ -10,6 +10,10 @@ function MyApp({ Component, pageProps }: AppProps) {
       value={{
         fetcher: (resource, init) =>
           fetch(resource, init).then((res) => res.json()),
+        refreshInterval: 0,
+        refreshWhenHidden: false,
+        revalidateOnFocus: false,
+        revalidateOnReconnect: false,
       }}
     >
       <Component {...pageProps} />

@@ -1,4 +1,4 @@
-import { GetServerSideProps, NextPage } from "next";
+import { GetStaticProps, GetStaticPaths, NextPage } from "next";
 
 //* components *//
 import { PhotoCard, UserMorePhotosFeed } from "../../components/photo";
@@ -30,7 +30,16 @@ const PhotoPage: NextPage<Props> = ({ name, photo, username }) => {
   );
 };
 
-export const getServerSideProps: GetServerSideProps = async ({ params }) => {
+//* static side generation *//
+//* static side generation *//
+export const getStaticPaths: GetStaticPaths = async (ctx) => {
+  return {
+    paths: [],
+    fallback: "blocking",
+  };
+};
+
+export const getStaticProps: GetStaticProps = async ({ params }) => {
   const { id } = params as { id: string };
 
   const photo = await getPhoto(id);

@@ -1,9 +1,5 @@
-/* eslint-disable react-hooks/exhaustive-deps */
-import { Dispatch, SetStateAction, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import useSWR from "swr";
-
-//* utils *//
-import { calcColumns } from "../utils/calcColumns";
 
 //* interfaces *//
 import { IPhoto } from "../interfaces/photos";
@@ -11,16 +7,18 @@ import { IPhoto } from "../interfaces/photos";
 interface Return {
   error: boolean;
   isLoading: boolean;
-  photos: IPhoto[][];
+  photos: IPhoto[];
   getNextPage: () => void;
 }
 
 export const useFetchPhotos = (): Return => {
   const [pageIndex, setPageIndex] = useState(1);
   const [isLoading, setIsLoading] = useState(true);
-  const [photos, setPhotos] = useState<IPhoto[][]>([]);
+  const [photos, setPhotos] = useState<IPhoto[]>([]);
+
   const { data, error } = useSWR<IPhoto[]>(
-    `${process.env.NEXT_PUBLIC_BASEURL_API}/photos/?client_id=${process.env.NEXT_PUBLIC_UNSPLASH_ACCESS_KEY}&page=${pageIndex}&per_page=30`
+    `${process.env.NEXT_PUBLIC_BASEURL_API}/photos/?client_id=${process.env.NEXT_PUBLIC_UNSPLASH_ACCESS_KEY}&page=${pageIndex}&per_page=30`,
+    { refreshInterval: 0 }
   );
 
   const getNextPage = () => {
@@ -31,22 +29,13 @@ export const useFetchPhotos = (): Return => {
 
   useEffect(() => {
     if (data && !error) {
-      calcColumns({
-        columnsProps: [
-          { columnsNumber: 1, min_width: 0 },
-          { columnsNumber: 2, min_width: 640 },
-          { columnsNumber: 3, min_width: 1024 },
-        ],
-        elements: photos,
-        newElements: data,
-        setElements: setPhotos,
-      });
+      setPhotos((prev) => [...prev, ...data.flat()]);
 
       setTimeout(() => {
         setIsLoading(false);
-      }, 1500);
+      }, 2000);
     }
-  }, [data]);
+  }, [data, error]);
 
   return {
     // properties

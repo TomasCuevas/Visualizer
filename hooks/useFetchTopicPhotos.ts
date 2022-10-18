@@ -4,21 +4,23 @@ import useSWR from "swr";
 
 //* interface *//
 import { IPhoto } from "../interfaces/photos";
-import { calcColumns } from "../utils";
 
 interface Return {
   error: boolean;
   isLoading: boolean;
-  photos: IPhoto[][];
+  photos: IPhoto[];
   getNextPage: () => void;
 }
 
 export const useFetchTopicPhotos = (topic: string): Return => {
+  const [previousTopic, setPreviousTopic] = useState("");
   const [pageIndex, setPageIndex] = useState(1);
   const [isLoading, setIsLoading] = useState(true);
-  const [photos, setPhotos] = useState<IPhoto[][]>([]);
+  const [photos, setPhotos] = useState<IPhoto[]>([]);
+
   const { data, error } = useSWR<IPhoto[]>(
-    `${process.env.NEXT_PUBLIC_BASEURL_API}/topics/${topic}/photos/?client_id=${process.env.NEXT_PUBLIC_UNSPLASH_ACCESS_KEY}&page=${pageIndex}&per_page=30`
+    `${process.env.NEXT_PUBLIC_BASEURL_API}/topics/${topic}/photos/?client_id=${process.env.NEXT_PUBLIC_UNSPLASH_ACCESS_KEY}&page=${pageIndex}&per_page=30`,
+    { refreshInterval: 0 }
   );
 
   const getNextPage = () => {
@@ -28,28 +30,28 @@ export const useFetchTopicPhotos = (topic: string): Return => {
   };
 
   useEffect(() => {
-    if (data && !error) {
-      calcColumns({
-        columnsProps: [
-          { columnsNumber: 1, min_width: 0 },
-          { columnsNumber: 2, min_width: 640 },
-          { columnsNumber: 3, min_width: 1024 },
-        ],
-        elements: photos,
-        newElements: data,
-        setElements: setPhotos,
-      });
+    if (data && !error && previousTopic !== topic) {
+      setPreviousTopic(topic);
+      setPhotos([...data.flat()]);
 
       setTimeout(() => {
         setIsLoading(false);
-      }, 1500);
+      }, 2000);
+      return;
     }
-  }, [data]);
+
+    if (data && !error && previousTopic === topic) {
+      setPhotos((prev) => [...prev, ...data.flat()]);
+
+      setTimeout(() => {
+        setIsLoading(false);
+      }, 2000);
+      return;
+    }
+  }, [data, error]);
 
   useEffect(() => {
     setPageIndex(1);
-    setIsLoading(true);
-    setPhotos([]);
   }, [topic]);
 
   return {

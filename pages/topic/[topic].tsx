@@ -1,4 +1,4 @@
-import { NextPage, GetServerSideProps } from "next";
+import { NextPage, GetStaticProps, GetStaticPaths } from "next";
 
 //* layout *//
 import { PrincipalLayout } from "../../components/layouts";
@@ -7,8 +7,7 @@ import { PrincipalLayout } from "../../components/layouts";
 import { TopicFeed, TopicHero } from "../../components/topic";
 
 //* utils *//
-import { getTopic } from "../../utils";
-import { useEffect } from "react";
+import { getTopic, topics } from "../../utils";
 
 //* interfaces *//
 interface Props {
@@ -24,8 +23,6 @@ const TopicPage: NextPage<Props> = ({
   slug,
   title,
 }) => {
-  useEffect(() => {}, [title]);
-
   return (
     <PrincipalLayout title={`${title} | Visualizer`} description={description}>
       <TopicHero
@@ -38,9 +35,20 @@ const TopicPage: NextPage<Props> = ({
   );
 };
 
-//* server side render *//
-//* server side render *//
-export const getServerSideProps: GetServerSideProps = async ({ params }) => {
+//* static side generation *//
+//* static side generation *//
+export const getStaticPaths: GetStaticPaths = async (ctx) => {
+  const allTopics = topics;
+
+  return {
+    paths: allTopics.map(({ slug }) => ({
+      params: { topic: slug },
+    })),
+    fallback: "blocking",
+  };
+};
+
+export const getStaticProps: GetStaticProps = async ({ params }) => {
   const { topic } = params as { topic: string };
 
   const topicData = await getTopic(topic);
