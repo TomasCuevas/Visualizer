@@ -12,12 +12,12 @@ export const FormSearch: React.FC = () => {
     event.preventDefault();
 
     if (toSearch.length > 1)
-      router.push(`/search?search=${toSearch}`, undefined, { scroll: false });
+      router.push(`/search/${toSearch}`, undefined, { scroll: false });
   };
 
   useEffect(() => {
-    if (router.pathname === "/search") {
-      const query = router.asPath.split("?")[1].split("=")[1];
+    if (router.pathname === "/search/[search]") {
+      const query = router.asPath.split("/")[2];
       setToSearch(query ? query.replaceAll("%20", " ") : "");
     }
   }, [router]);

@@ -17,7 +17,7 @@ export const FeedCard: React.FC<IPhoto> = ({
   const isInPhotoPage = pathname.includes("/photo/[id]");
 
   return (
-    <article className="group relative flex min-w-full flex-col items-center">
+    <article className="items-cente group relative flex min-w-full flex-col">
       <header
         className={
           isInPhotoPage
@@ -47,7 +47,7 @@ export const FeedCard: React.FC<IPhoto> = ({
           <Image
             src={small}
             alt={`${name} photo`}
-            className="relative h-auto min-w-full cursor-zoom-in rounded-3xl object-cover"
+            className="relative h-auto min-w-full cursor-zoom-in rounded-3xl object-cover shadow-md shadow-gray-900/50"
             height="0"
             width="0"
             sizes="100%"

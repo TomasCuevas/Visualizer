@@ -2,9 +2,6 @@
 import { useState, useEffect } from "react";
 import useSWR from "swr";
 
-//* utils *//
-import { calcColumns } from "../utils";
-
 //* interfaces *//
 import { IPhoto } from "../interfaces/photos";
 import { ISearch } from "../interfaces/seach";
@@ -14,16 +11,19 @@ import { ISearch } from "../interfaces/seach";
 interface Return {
   error: boolean;
   isLoading: boolean;
-  photos: IPhoto[][];
+  photos: IPhoto[];
   getNextPage: () => void;
 }
 
 export const useFetchSearchPhotos = (search: string): Return => {
+  const [previousSearch, setPreviousSearch] = useState("");
   const [pageIndex, setPageIndex] = useState(1);
   const [isLoading, setIsLoading] = useState(true);
-  const [photos, setPhotos] = useState<IPhoto[][]>([]);
+  const [photos, setPhotos] = useState<IPhoto[]>([]);
+
   const { data, error } = useSWR<ISearch>(
-    `${process.env.NEXT_PUBLIC_BASEURL_API}/search/photos/?client_id=${process.env.NEXT_PUBLIC_UNSPLASH_ACCESS_KEY}&page=${pageIndex}&per_page=30&query=${search}`
+    `${process.env.NEXT_PUBLIC_BASEURL_API}/search/photos/?client_id=${process.env.NEXT_PUBLIC_UNSPLASH_ACCESS_KEY}&page=${pageIndex}&per_page=30&query=${search}`,
+    { refreshInterval: 0 }
   );
 
   const getNextPage = () => {
@@ -33,28 +33,28 @@ export const useFetchSearchPhotos = (search: string): Return => {
   };
 
   useEffect(() => {
-    if (data && !error) {
-      calcColumns({
-        columnsProps: [
-          { columnsNumber: 1, min_width: 0 },
-          { columnsNumber: 2, min_width: 640 },
-          { columnsNumber: 3, min_width: 1024 },
-        ],
-        elements: photos,
-        newElements: data.results,
-        setElements: setPhotos,
-      });
+    if (data && !error && previousSearch !== search) {
+      setPreviousSearch(search);
+      setPhotos([...data.results.flat()]);
 
       setTimeout(() => {
         setIsLoading(false);
-      }, 1500);
+      }, 2000);
+      return;
+    }
+
+    if (data && !error && previousSearch === search) {
+      setPhotos((prev) => [...prev, ...data.results.flat()]);
+
+      setTimeout(() => {
+        setIsLoading(false);
+      }, 2000);
+      return;
     }
   }, [data]);
 
   useEffect(() => {
     setPageIndex(1);
-    setPhotos([]);
-    setIsLoading(true);
   }, [search]);
 
   return {

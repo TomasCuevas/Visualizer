@@ -25,7 +25,7 @@ export const Navbar: React.FC = () => {
   const { topic: topicQuery } = query;
 
   return (
-    <nav className="w-ful relative z-30 flex h-[60px] items-center justify-center overflow-hidden bg-white px-[5%]">
+    <nav className="w-ful relative z-30 flex h-[60px] items-center justify-center overflow-hidden bg-white px-[5%] shadow-md">
       <div
         className={
           showLeftArrow
