@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useState, useEffect } from "react";
-import useSWR from "swr";
+import uswSWRInfinity from "swr/infinite";
 
 //* interface *//
 import { IPhoto } from "../interfaces/photos";
@@ -13,46 +13,29 @@ interface Return {
 }
 
 export const useFetchTopicPhotos = (topic: string): Return => {
-  const [previousTopic, setPreviousTopic] = useState("");
-  const [pageIndex, setPageIndex] = useState(1);
+  const getPageIndex = (pageIndex: number) =>
+    `${process.env.NEXT_PUBLIC_BASEURL_API}/topics/${topic}/photos/?client_id=${process.env.NEXT_PUBLIC_UNSPLASH_ACCESS_KEY}&page=${pageIndex}&per_page=30`;
+
   const [isLoading, setIsLoading] = useState(true);
   const [photos, setPhotos] = useState<IPhoto[]>([]);
 
-  const { data, error } = useSWR<IPhoto[]>(
-    `${process.env.NEXT_PUBLIC_BASEURL_API}/topics/${topic}/photos/?client_id=${process.env.NEXT_PUBLIC_UNSPLASH_ACCESS_KEY}&page=${pageIndex}&per_page=30`,
-    { refreshInterval: 0 }
-  );
+  const { data, error, setSize } = uswSWRInfinity<IPhoto[]>(getPageIndex);
 
   const getNextPage = () => {
     if (isLoading) return;
-    setPageIndex((prev) => prev + 1);
+    setSize((prev) => prev + 1);
     setIsLoading(true);
   };
 
   useEffect(() => {
-    if (data && !error && previousTopic !== topic) {
-      setPreviousTopic(topic);
-      setPhotos([...data.flat()]);
+    if (data && !error) {
+      setPhotos((prev) => [...data.flat()]);
 
       setTimeout(() => {
         setIsLoading(false);
-      }, 2000);
-      return;
-    }
-
-    if (data && !error && previousTopic === topic) {
-      setPhotos((prev) => [...prev, ...data.flat()]);
-
-      setTimeout(() => {
-        setIsLoading(false);
-      }, 2000);
-      return;
+      }, 500);
     }
   }, [data, error]);
-
-  useEffect(() => {
-    setPageIndex(1);
-  }, [topic]);
 
   return {
     // properties
