@@ -30,7 +30,7 @@ export const FeedColumn: React.FC<Props> = ({ photos, getNextPage }) => {
       <div className="relative w-full">
         <div
           ref={ref}
-          className="absolute left-0 bottom-0 h-[700px] w-full sm:h-[2000px]"
+          className="absolute left-0 bottom-0 h-[700px] w-full sm:h-[1000px]"
         />
       </div>
     </div>

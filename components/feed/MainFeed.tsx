@@ -1,5 +1,3 @@
-import { useMemo } from "react";
-
 //* components *//
 import { Loader } from "../ui";
 import { FeedColumn } from "./";
