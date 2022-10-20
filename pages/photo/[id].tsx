@@ -7,7 +7,7 @@ import { PhotoCard, UserMorePhotosFeed } from "../../components/photo";
 import { getPhoto } from "../../utils";
 
 //* layout *//
-import { PrincipalLayout } from "../../components/layouts";
+import { SecondaryLayout } from "../../components/layouts";
 
 //* intefaces *//
 import { IPhoto } from "../../interfaces/photos";
@@ -20,13 +20,13 @@ interface Props {
 
 const PhotoPage: NextPage<Props> = ({ name, photo, username }) => {
   return (
-    <PrincipalLayout
+    <SecondaryLayout
       title={photo.description ? photo.description : `HD photo by ${name}`}
       description="Pagina de photo"
     >
       <PhotoCard {...photo} />
       <UserMorePhotosFeed username={username} />
-    </PrincipalLayout>
+    </SecondaryLayout>
   );
 };
 

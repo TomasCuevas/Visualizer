@@ -1,7 +1,7 @@
 import { NextPage, GetStaticProps, GetStaticPaths } from "next";
 
 //* layout *//
-import { PrincipalLayout } from "../../components/layouts";
+import { SecondaryLayout } from "../../components/layouts";
 
 //* components *//
 import { SearchFeed } from "../../components/search";
@@ -13,12 +13,12 @@ interface Props {
 
 const SearchPhotosPage: NextPage<Props> = ({ search }) => {
   return (
-    <PrincipalLayout
+    <SecondaryLayout
       title={`${search} - Visualizer`}
       description="Pagina de busqueda - Visualizer"
     >
       <SearchFeed search={search} />
-    </PrincipalLayout>
+    </SecondaryLayout>
   );
 };
 
