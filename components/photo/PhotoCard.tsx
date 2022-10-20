@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import NextLink from "next/link";
 import Image from "next/future/image";
 import { saveAs } from "file-saver";
@@ -34,6 +34,10 @@ export const PhotoCard: React.FC<IPhoto> = ({
 
   dayjs.locale("es");
   const date = dayjs(created_at).format("D MMMM. YYYY");
+
+  useEffect(() => {
+    setImageFull(false);
+  }, [regular]);
 
   return (
     <article className="mx-auto w-full pb-3">
@@ -85,12 +89,13 @@ export const PhotoCard: React.FC<IPhoto> = ({
           alt="photo"
           className={
             imageFull
-              ? "w-screen object-contain xl:min-h-[calc(100vh_-_220px)]"
-              : "max-h-[calc(100vh_-_220px)] w-screen object-contain md:px-5 xl:min-h-[calc(100vh_-_220px)]"
+              ? "w-screen cursor-zoom-out object-contain xl:min-h-[calc(100vh_-_220px)]"
+              : "max-h-[calc(100vh_-_220px)] w-screen cursor-zoom-in object-contain md:px-5 xl:min-h-[calc(100vh_-_220px)]"
           }
           height="0"
           width="0"
           sizes="100%"
+          quality={100}
           priority
           onClick={onSetImageFul}
         />

@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { useRouter } from "next/router";
 import NextLink from "next/link";
 import Image from "next/future/image";
@@ -14,6 +15,8 @@ export const FeedCard: React.FC<IPhoto> = ({
     username,
   },
 }) => {
+  const [isLoading, setIsLoading] = useState(false);
+
   const { pathname } = useRouter();
   const isInPhotoPage = pathname.includes("/photo/[id]");
 
@@ -52,11 +55,16 @@ export const FeedCard: React.FC<IPhoto> = ({
           <Image
             src={small}
             alt={`${name} photo`}
-            className="relative h-auto min-w-full cursor-zoom-in rounded-3xl object-cover shadow-md shadow-gray-900/50"
+            className={
+              isLoading
+                ? "relative h-auto min-w-full scale-100 cursor-zoom-in rounded-3xl object-cover shadow-md shadow-gray-900/50 blur-0 transition-all duration-300"
+                : "relative h-auto min-w-full scale-105 cursor-zoom-in rounded-3xl object-cover opacity-100 shadow-md shadow-gray-900/50 blur-xl transition-all duration-300"
+            }
             height="0"
             width="0"
             sizes="100%"
-            quality={70}
+            quality={isLoading ? 70 : 1}
+            onLoadingComplete={() => setIsLoading(true)}
           />
           <div
             className={

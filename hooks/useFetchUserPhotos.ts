@@ -18,7 +18,9 @@ export const useFetchUserPhotos = (username: string): Return => {
   const [isLoading, setIsLoading] = useState(true);
   const [photos, setPhotos] = useState<IPhoto[]>([]);
 
-  const { data, error, setSize } = uswSWRInfinity<IPhoto[]>(getPageIndex);
+  const { data, error, setSize } = uswSWRInfinity<IPhoto[]>(getPageIndex, {
+    initialSize: 1,
+  });
 
   const getNextPage = () => {
     if (isLoading) return;

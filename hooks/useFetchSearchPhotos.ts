@@ -22,7 +22,9 @@ export const useFetchSearchPhotos = (search: string): Return => {
   const [isLoading, setIsLoading] = useState(true);
   const [photos, setPhotos] = useState<IPhoto[]>([]);
 
-  const { data, error, setSize } = uswSWRInfinity<ISearch>(getPageIndex);
+  const { data, error, setSize } = uswSWRInfinity<ISearch>(getPageIndex, {
+    initialSize: 1,
+  });
 
   const getNextPage = () => {
     if (isLoading) return;
