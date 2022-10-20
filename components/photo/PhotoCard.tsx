@@ -22,7 +22,15 @@ export const PhotoCard: React.FC<IPhoto> = ({
   views,
   location,
 }) => {
-  const [imageFull, setImageFull] = useState(false);
+  const [imageFull, setImageFull] = useState<boolean>(false);
+  const [scroll, setScroll] = useState<number>(0);
+
+  const onSetImageFul = () => {
+    if (imageFull) scrollTo(0, scroll);
+    if (!imageFull) setScroll(window.scrollY);
+
+    setImageFull((prev) => !prev);
+  };
 
   dayjs.locale("es");
   const date = dayjs(created_at).format("D MMMM. YYYY");
@@ -84,7 +92,7 @@ export const PhotoCard: React.FC<IPhoto> = ({
           width="0"
           sizes="100%"
           priority
-          onClick={() => setImageFull((prev) => !prev)}
+          onClick={onSetImageFul}
         />
       </main>
 
