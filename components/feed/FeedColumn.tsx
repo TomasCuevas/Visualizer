@@ -23,11 +23,11 @@ export const FeedColumn: React.FC<Props> = ({ photos, getNextPage }) => {
   }, [inView]);
 
   return (
-    <div className="mx-auto flex min-w-full flex-col gap-3">
+    <div className="mx-auto flex min-w-full flex-col gap-4 sm:gap-3">
       {photos.map((photo) => (
         <FeedCard key={photo.id} {...photo} />
       ))}
-      <div className="relative w-full">
+      <div className="relative -z-10 w-full">
         <div
           ref={ref}
           className="absolute left-0 bottom-0 h-[700px] w-full sm:h-[1000px]"

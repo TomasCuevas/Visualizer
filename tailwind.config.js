@@ -14,6 +14,9 @@ module.exports = {
         decoratedark: "#181919",
         decoratedarklight: "#514f52",
       },
+      screens: {
+        xs: "500px",
+      },
     },
   },
   plugins: [],

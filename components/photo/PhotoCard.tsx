@@ -1,46 +1,68 @@
+import { useState } from "react";
+import NextLink from "next/link";
+import Image from "next/future/image";
 import { saveAs } from "file-saver";
 import dayjs from "dayjs";
 import "dayjs/locale/es";
 
 //* interfaces *//
 import { IPhoto } from "../../interfaces/photos";
-import Image from "next/future/image";
 
 export const PhotoCard: React.FC<IPhoto> = ({
+  id,
   created_at,
   downloads,
   exif: { name: cameraName },
   urls: { full, regular },
-  user,
+  user: {
+    username,
+    name,
+    profile_image: { large },
+  },
   views,
   location,
 }) => {
-  const {
-    name,
-    profile_image: { large },
-  } = user;
+  const [imageFull, setImageFull] = useState(false);
 
   dayjs.locale("es");
   const date = dayjs(created_at).format("D MMMM. YYYY");
 
   return (
-    <article className="mx-auto w-full py-3">
-      <header className="sticky top-0 z-50 flex h-[60px] items-center gap-2 bg-white px-[5%]">
-        <div className="mx-auto flex w-full max-w-[1300px] items-center gap-2">
-          <Image
-            src={large}
-            alt="profile image"
-            className="h-[40px] w-[40px] rounded-full"
-            height={0}
-            width={0}
-            sizes="40px"
-          />
-          <span className="text-base font-normal text-darklighttext">
-            {name}
-          </span>
-          <div className="group ml-auto flex w-[120px] cursor-pointer items-center justify-center rounded-full border border-background py-2 px-5 transition-all duration-300 hover:bg-background">
+    <article className="mx-auto w-full pb-3">
+      <header className="sticky top-0 z-50 flex h-[60px] items-center gap-2 bg-white px-[5%] lg:h-[70px]">
+        <div className="mx-auto flex h-[60px] w-full items-center gap-2">
+          <NextLink href={`https://unsplash.com/@${username}`}>
+            <a target="__blank" className="flex items-center gap-2">
+              <Image
+                src={large}
+                alt="profile image"
+                className="h-[40px] w-[40px] rounded-full"
+                height={0}
+                width={0}
+                sizes="40px"
+              />
+              <span className="text-base font-normal text-darklighttext">
+                {name}
+              </span>
+            </a>
+          </NextLink>
+          <div className="group ml-auto hidden h-[40px] cursor-pointer items-center justify-center rounded-full border border-black py-2 px-5 xs:flex">
+            <NextLink href={`https://unsplash.com/photos/${id}`}>
+              <a target="__blank" className="flex items-center gap-2">
+                <span className="hidden md:block">Ver en</span>
+                <Image
+                  src="/unsplash.svg"
+                  alt="unsplash logo"
+                  width={0}
+                  height={0}
+                  className="w-[80px]"
+                />
+              </a>
+            </NextLink>
+          </div>
+          <div className="group ml-auto flex h-[40px] cursor-pointer items-center justify-center rounded-full border border-background py-2 px-5 transition-all duration-300 hover:bg-background xs:ml-0">
             <span
-              className="text-background transition-all duration-300 group-hover:font-bold group-hover:text-lighttext"
+              className="text-background transition-all duration-300 group-hover:text-lighttext"
               onClick={() => saveAs(full, name)}
             >
               Descargar
@@ -53,15 +75,20 @@ export const PhotoCard: React.FC<IPhoto> = ({
         <Image
           src={regular}
           alt="photo"
-          className="mx-auto max-h-[calc(100vh_-_220px)] w-screen object-contain sm:px-[5%] md:w-auto"
+          className={
+            imageFull
+              ? "w-screen object-contain xl:min-h-[calc(100vh_-_220px)]"
+              : "max-h-[calc(100vh_-_220px)] w-screen object-contain md:px-5 xl:min-h-[calc(100vh_-_220px)]"
+          }
           height="0"
           width="0"
           sizes="100%"
           priority
+          onClick={() => setImageFull((prev) => !prev)}
         />
       </main>
 
-      <footer className="relative z-40 mx-auto flex max-w-[1300px] flex-col gap-7 bg-white px-[5%] py-5 xl:py-10">
+      <footer className="relative z-40 mx-auto flex flex-col gap-7 bg-white px-[5%] py-5 xl:py-10">
         <div className="flex flex-col gap-2">
           <span>
             <p className="font-light text-gray-500">Visualizaciones</p>
