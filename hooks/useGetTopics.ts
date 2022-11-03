@@ -20,7 +20,7 @@ export const useGetTopics = (): Return => {
   const router = useRouter();
 
   useEffect(() => {
-    if (topics) {
+    if (topics && !error) {
       setIsLoading(false);
       return;
     }
