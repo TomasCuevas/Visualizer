@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import uswSWRInfinity from "swr/infinite";
+import useSWRInmutable from "swr/immutable";
 
 //* interfaces *//
 import { IPhoto } from "../interfaces/photos";
@@ -12,25 +12,24 @@ interface Return {
 }
 
 export const useFetchPhotos = (): Return => {
-  const getPageIndex = (pageIndex: number) =>
-    `${process.env.NEXT_PUBLIC_BASEURL_API}/photos/?client_id=${process.env.NEXT_PUBLIC_UNSPLASH_ACCESS_KEY}&page=${pageIndex}&per_page=30`;
-
+  const [pageIndex, setPageIndex] = useState(1);
   const [isLoading, setIsLoading] = useState(true);
   const [photos, setPhotos] = useState<IPhoto[]>([]);
 
-  const { data, error, setSize } = uswSWRInfinity<IPhoto[]>(getPageIndex, {
-    initialSize: 1,
-  });
+  const { data, error } = useSWRInmutable<IPhoto[]>(
+    `${process.env.NEXT_PUBLIC_BASEURL_API}/photos/?client_id=${process.env.NEXT_PUBLIC_UNSPLASH_ACCESS_KEY}&page=${pageIndex}&per_page=30`
+  );
 
   const getNextPage = () => {
     if (isLoading) return;
-    setSize((prev) => prev + 1);
+    setPageIndex((prev) => prev + 1);
     setIsLoading(true);
   };
 
   useEffect(() => {
     if (data && !error) {
-      setPhotos((prev) => [...data.flat()]);
+      console.log(data);
+      setPhotos((prev) => [...prev, ...data.flat()]);
 
       setTimeout(() => {
         setIsLoading(false);
