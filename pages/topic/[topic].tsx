@@ -1,4 +1,4 @@
-import { NextPage, GetStaticProps } from "next";
+import { NextPage, GetStaticProps, GetStaticPaths } from "next";
 
 //* layout *//
 import { PrincipalLayout } from "../../components/layouts";
@@ -37,6 +37,20 @@ const TopicPage: NextPage<Props> = ({
 
 //* static side generation *//
 //* static side generation *//
+
+export const getStaticPaths: GetStaticPaths = (ctx) => {
+  return {
+    paths: [
+      {
+        params: {
+          topic: "",
+        },
+      },
+    ],
+    fallback: "blocking",
+  };
+};
+
 export const getStaticProps: GetStaticProps = async ({ params }) => {
   const allTopics = await getTopics();
   const { topic } = params as { topic: string };

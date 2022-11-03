@@ -5,13 +5,10 @@ import { useRouter } from "next/router";
 import { MdKeyboardArrowLeft, MdKeyboardArrowRight } from "react-icons/md";
 
 //* hooks *//
-import { useSlider } from "../../hooks";
-
-//* topics *//
-import { topics } from "../../utils";
+import { useGetTopics, useSlider } from "../../hooks";
 
 export const Navbar: React.FC = () => {
-  const { query } = useRouter();
+  const { isLoading, topics } = useGetTopics();
   const {
     distanceToLeft,
     elementsRef,
@@ -22,6 +19,7 @@ export const Navbar: React.FC = () => {
     ulRef,
   } = useSlider();
 
+  const { query } = useRouter();
   const { topic: topicQuery } = query;
 
   return (
@@ -44,29 +42,31 @@ export const Navbar: React.FC = () => {
           style={{ left: distanceToLeft }}
           className="absolute flex h-full items-center gap-5 transition-all duration-300"
         >
-          {topics.map(({ topic, url, slug }, index) => (
-            <li
-              ref={(element) => (elementsRef.current[index] = element)}
-              key={url}
-              className={
-                slug === topicQuery
-                  ? "flex h-full w-full items-center border-b-2 border-black"
-                  : "flex h-full w-full items-center border-b-2 border-black/0"
-              }
-            >
-              <NextLink href={url} passHref>
-                <a
+          {!isLoading
+            ? topics!.map(({ title, slug, id }, index) => (
+                <li
+                  ref={(element) => (elementsRef.current[index] = element)}
+                  key={id}
                   className={
                     slug === topicQuery
-                      ? "whitespace-nowrap text-sm font-normal text-black"
-                      : "whitespace-nowrap text-sm font-normal text-gray-400"
+                      ? "flex h-full w-full items-center border-b-2 border-black"
+                      : "flex h-full w-full items-center border-b-2 border-black/0"
                   }
                 >
-                  {topic}
-                </a>
-              </NextLink>
-            </li>
-          ))}
+                  <NextLink href={`/topic/${slug}`} passHref>
+                    <a
+                      className={
+                        slug === topicQuery
+                          ? "whitespace-nowrap text-sm font-normal text-black"
+                          : "whitespace-nowrap text-sm font-normal text-gray-400"
+                      }
+                    >
+                      {title}
+                    </a>
+                  </NextLink>
+                </li>
+              ))
+            : null}
         </ul>
       </div>
       <div
