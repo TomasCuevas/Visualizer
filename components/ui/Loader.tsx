@@ -9,7 +9,7 @@ export const Loader: React.FC<Props> = ({ loading }) => {
     <div
       className={
         loading
-          ? "absolute bottom-0 my-5 flex h-[80px] w-full items-center justify-center"
+          ? "my-5 flex h-[80px] w-full items-center justify-center"
           : "hidden"
       }
     >

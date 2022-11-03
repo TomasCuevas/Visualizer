@@ -1,133 +1,176 @@
 export interface ITopic {
-  cover_photo: CoverPhoto;
-  current_user_contributions: any[];
-  description: string;
-  ends_at: null;
-  featured: boolean;
   id: string;
-  links: RootObjectLinks;
-  only_submissions_after: null;
-  owners: User[];
-  preview_photos: PreviewPhoto[];
-  published_at: Date;
   slug: string;
-  starts_at: Date;
-  status: string;
   title: string;
-  top_contributors: User[];
-  total_current_user_submissions: null;
-  total_photos: number;
-  updated_at: Date;
-  visibility: string;
-}
-
-export interface CoverPhoto {
-  alt_description: null;
-  blur_hash: string;
-  color: string;
-  created_at: Date;
-  current_user_collections: any[];
   description: string;
-  height: number;
+  published_at: string;
+  updated_at: string;
+  starts_at: string;
+  ends_at?: any;
+  only_submissions_after: string;
+  visibility: string;
+  featured: boolean;
+  total_photos: number;
+  current_user_contributions: any[];
+  total_current_user_submissions?: any;
+  links: Links;
+  status: string;
+  owners: Owner[];
+  cover_photo: Coverphoto;
+  preview_photos: Previewphoto[];
+}
+
+interface Previewphoto {
   id: string;
-  liked_by_user: boolean;
-  likes: number;
-  links: CoverPhotoLinks;
-  promoted_at: null;
-  sponsorship: null;
-  topic_submissions: TopicSubmissions;
-  updated_at: Date;
+  created_at: string;
+  updated_at: string;
+  blur_hash: string;
   urls: Urls;
-  user: User;
-  width: number;
 }
 
-export interface CoverPhotoLinks {
-  download: string;
-  download_location: string;
-  html: string;
-  self: string;
-}
-
-export interface TopicSubmissions {
-  athletics: Athletics;
-  health: Athletics;
-  people: People;
-}
-
-export interface Athletics {
-  approved_on: Date;
-  status: string;
-}
-
-export interface People {
-  status: string;
-}
-
-export interface Urls {
-  full: string;
-  raw: string;
-  regular: string;
-  small: string;
-  small_s3: string;
-  thumb: string;
-}
-
-export interface User {
-  accepted_tos: boolean;
-  bio: null | string;
-  first_name: string;
-  for_hire: boolean;
+interface Coverphoto {
   id: string;
-  instagram_username: null | string;
-  last_name: null | string;
-  links: UserLinks;
-  location: null | string;
+  created_at: string;
+  updated_at: string;
+  promoted_at?: string;
+  width: number;
+  height: number;
+  color: string;
+  blur_hash: string;
+  description?: string;
+  alt_description?: any;
+  urls: Urls;
+  links: Links3;
+  likes: number;
+  liked_by_user: boolean;
+  current_user_collections: any[];
+  sponsorship?: any;
+  topic_submissions: Topicsubmissions;
+  user: User;
+}
+
+interface User {
+  id: string;
+  updated_at: string;
+  username: string;
   name: string;
-  portfolio_url: null | string;
-  profile_image: ProfileImage;
-  social: Social;
+  first_name: string;
+  last_name: string;
+  twitter_username?: string;
+  portfolio_url?: string;
+  bio?: string;
+  location?: string;
+  links: Links2;
+  profile_image: Profileimage;
+  instagram_username?: string;
   total_collections: number;
   total_likes: number;
   total_photos: number;
-  twitter_username: null | string;
-  updated_at: Date;
-  username: string;
+  accepted_tos: boolean;
+  for_hire: boolean;
+  social: Social2;
 }
 
-export interface UserLinks {
-  followers: string;
-  following: string;
-  html: string;
-  likes: string;
-  photos: string;
-  portfolio: string;
+interface Social2 {
+  instagram_username?: string;
+  portfolio_url?: string;
+  twitter_username?: string;
+  paypal_email?: any;
+}
+
+interface Topicsubmissions {
+  "street-photography"?: Streetphotography;
+  experimental?: Experimental;
+  film?: Film;
+  "current-events"?: Film;
+  "architecture-interior"?: Experimental;
+  "3d-renders"?: Film;
+  "fashion-beauty"?: Experimental;
+  nature?: Experimental;
+  spirituality?: Streetphotography;
+  "food-drink"?: Experimental;
+  "arts-culture"?: Experimental;
+  people?: Film;
+  athletics?: Experimental;
+}
+
+interface Film {
+  status: string;
+  approved_on?: string;
+}
+
+interface Experimental {
+  status: string;
+  approved_on: string;
+}
+
+interface Streetphotography {
+  status: string;
+}
+
+interface Links3 {
   self: string;
+  html: string;
+  download: string;
+  download_location: string;
 }
 
-export interface ProfileImage {
-  large: string;
-  medium: string;
+interface Urls {
+  raw: string;
+  full: string;
+  regular: string;
   small: string;
+  thumb: string;
+  small_s3: string;
 }
 
-export interface Social {
-  instagram_username: null | string;
-  paypal_email: null;
-  portfolio_url: null | string;
-  twitter_username: null | string;
+interface Owner {
+  id: string;
+  updated_at: string;
+  username: string;
+  name: string;
+  first_name: string;
+  last_name?: any;
+  twitter_username: string;
+  portfolio_url: string;
+  bio: string;
+  location: string;
+  links: Links2;
+  profile_image: Profileimage;
+  instagram_username: string;
+  total_collections: number;
+  total_likes: number;
+  total_photos: number;
+  accepted_tos: boolean;
+  for_hire: boolean;
+  social: Social;
 }
 
-export interface RootObjectLinks {
+interface Social {
+  instagram_username: string;
+  portfolio_url: string;
+  twitter_username: string;
+  paypal_email?: any;
+}
+
+interface Profileimage {
+  small: string;
+  medium: string;
+  large: string;
+}
+
+interface Links2 {
+  self: string;
   html: string;
   photos: string;
-  self: string;
+  likes: string;
+  portfolio: string;
+  following: string;
+  followers: string;
 }
 
-export interface PreviewPhoto {
-  blur_hash: string;
-  created_at: Date;
-  id: string;
-  updated_at: Date;
-  urls: Urls;
+interface Links {
+  self: string;
+  html: string;
+  photos: string;
 }

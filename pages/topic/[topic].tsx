@@ -1,4 +1,4 @@
-import { NextPage, GetStaticProps, GetStaticPaths } from "next";
+import { NextPage, GetStaticProps } from "next";
 
 //* layout *//
 import { PrincipalLayout } from "../../components/layouts";
@@ -7,7 +7,7 @@ import { PrincipalLayout } from "../../components/layouts";
 import { TopicFeed, TopicHero } from "../../components/topic";
 
 //* utils *//
-import { getTopic, topics } from "../../utils";
+import { getTopics } from "../../utils";
 
 //* interfaces *//
 interface Props {
@@ -37,21 +37,11 @@ const TopicPage: NextPage<Props> = ({
 
 //* static side generation *//
 //* static side generation *//
-export const getStaticPaths: GetStaticPaths = async (ctx) => {
-  const allTopics = topics;
-
-  return {
-    paths: allTopics.map(({ slug }) => ({
-      params: { topic: slug },
-    })),
-    fallback: "blocking",
-  };
-};
-
 export const getStaticProps: GetStaticProps = async ({ params }) => {
+  const allTopics = await getTopics();
   const { topic } = params as { topic: string };
 
-  const topicData = await getTopic(topic);
+  const topicData = allTopics.find(({ slug }) => slug === topic);
   if (!topicData) {
     return {
       redirect: {

@@ -1,3 +1,3 @@
 export * from "./getPhoto";
 export * from "./getTopic";
-export * from "./topics";
+export * from "./getTopics";
