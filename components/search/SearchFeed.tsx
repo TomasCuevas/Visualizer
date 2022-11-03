@@ -28,8 +28,8 @@ export const SearchFeed: React.FC<Props> = ({ search }) => {
         {columns.map((column, index) => (
           <FeedColumn key={index} photos={column} getNextPage={getNextPage} />
         ))}
-        <Loader loading={isLoading} />
       </section>
+      <Loader loading={isLoading} />
     </>
   );
 };

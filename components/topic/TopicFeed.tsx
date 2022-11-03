@@ -27,8 +27,8 @@ export const TopicFeed: React.FC<Props> = ({ topic }) => {
         {columns.map((column, index) => (
           <FeedColumn key={index} photos={column} getNextPage={getNextPage} />
         ))}
-        <Loader loading={isLoading} />
       </section>
+      <Loader loading={isLoading} />
     </>
   );
 };
