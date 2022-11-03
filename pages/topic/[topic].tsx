@@ -40,13 +40,7 @@ const TopicPage: NextPage<Props> = ({
 
 export const getStaticPaths: GetStaticPaths = (ctx) => {
   return {
-    paths: [
-      {
-        params: {
-          topic: "",
-        },
-      },
-    ],
+    paths: [],
     fallback: "blocking",
   };
 };
