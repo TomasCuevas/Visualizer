@@ -23,7 +23,8 @@ export const useFetchSearchPhotos = (search: string): Return => {
   const [photos, setPhotos] = useState<IPhoto[]>([]);
 
   const { data, error } = useSWRInmutable<ISearch>(
-    `${process.env.NEXT_PUBLIC_BASEURL_API}/search/photos/?client_id=${process.env.NEXT_PUBLIC_UNSPLASH_ACCESS_KEY}&page=${pageIndex}&per_page=30&query=${search}`
+    `${process.env.NEXT_PUBLIC_BASEURL_API}/search/photos/?client_id=${process.env.NEXT_PUBLIC_UNSPLASH_ACCESS_KEY}&page=${pageIndex}&per_page=30&query=${search}`,
+    { refreshInterval: 0 }
   );
 
   const router = useRouter();
@@ -37,10 +38,7 @@ export const useFetchSearchPhotos = (search: string): Return => {
   useEffect(() => {
     if (data && !error) {
       setPhotos((prev) => [...prev, ...data.results]);
-
-      setTimeout(() => {
-        setIsLoading(false);
-      }, 500);
+      setIsLoading(false);
       return;
     }
 

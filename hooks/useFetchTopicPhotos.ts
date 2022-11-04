@@ -19,7 +19,8 @@ export const useFetchTopicPhotos = (topic: string): Return => {
   const [photos, setPhotos] = useState<IPhoto[]>([]);
 
   const { data, error } = useSWRInmutable<IPhoto[]>(
-    `${process.env.NEXT_PUBLIC_BASEURL_API}/topics/${topic}/photos/?client_id=${process.env.NEXT_PUBLIC_UNSPLASH_ACCESS_KEY}&page=${pageIndex}&per_page=30`
+    `${process.env.NEXT_PUBLIC_BASEURL_API}/topics/${topic}/photos/?client_id=${process.env.NEXT_PUBLIC_UNSPLASH_ACCESS_KEY}&page=${pageIndex}&per_page=30`,
+    { refreshInterval: 0 }
   );
 
   const router = useRouter();
@@ -33,11 +34,7 @@ export const useFetchTopicPhotos = (topic: string): Return => {
   useEffect(() => {
     if (data && !error) {
       setPhotos((prev) => [...prev, ...data.flat()]);
-
-      setTimeout(() => {
-        setIsLoading(false);
-      }, 500);
-
+      setIsLoading(false);
       return;
     }
 

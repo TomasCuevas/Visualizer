@@ -17,7 +17,8 @@ export const useFetchPhotos = (): Return => {
   const [photos, setPhotos] = useState<IPhoto[]>([]);
 
   const { data, error } = useSWRInmutable<IPhoto[]>(
-    `${process.env.NEXT_PUBLIC_BASEURL_API}/photos/?client_id=${process.env.NEXT_PUBLIC_UNSPLASH_ACCESS_KEY}&page=${pageIndex}&per_page=30`
+    `${process.env.NEXT_PUBLIC_BASEURL_API}/photos/?client_id=${process.env.NEXT_PUBLIC_UNSPLASH_ACCESS_KEY}&page=${pageIndex}&per_page=30`,
+    { refreshInterval: 0 }
   );
 
   const getNextPage = () => {
@@ -28,12 +29,8 @@ export const useFetchPhotos = (): Return => {
 
   useEffect(() => {
     if (data && !error) {
-      console.log(data);
       setPhotos((prev) => [...prev, ...data.flat()]);
-
-      setTimeout(() => {
-        setIsLoading(false);
-      }, 500);
+      setIsLoading(false);
     }
   }, [data, error]);
 

@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { Dispatch, SetStateAction, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
 //* interfaces *//
 interface Props {
@@ -13,12 +13,14 @@ interface Return {
 
 export const useCalcColumns = ({ columnsProps, elements }: Props): Return => {
   const [columns, setColumns] = useState<any[][]>([]);
-  const [first, setFirst] = useState(true);
   const [previousElements, setPreviousElements] = useState<[][]>([]);
+  const [innerWidth, setInnerWidth] = useState<number>(0);
 
   const calColumns = (
-    columnsProps: { min_width: number; columnsNumber: number }[]
+    columnsProps: { min_width: number; columnsNumber: number }[],
+    reCalc = false
   ): void => {
+    if (previousElements === elements && !reCalc) return;
     let column: number = 0;
 
     columnsProps.forEach(({ min_width, columnsNumber }, index) => {
@@ -59,26 +61,24 @@ export const useCalcColumns = ({ columnsProps, elements }: Props): Return => {
     }
 
     setColumns(newColumns);
+    setPreviousElements(elements);
   };
 
   useEffect(() => {
-    if (first && elements?.length > 0) {
-      setPreviousElements(elements);
-      setFirst(false);
+    if (elements?.length > 0) {
       calColumns(columnsProps);
     }
 
-    if (!first && elements !== previousElements) {
-      setPreviousElements(elements);
-      calColumns(columnsProps);
-    }
-
-    const listener = window.addEventListener("resize", () =>
-      calColumns(columnsProps)
-    );
+    const listener = window.addEventListener("resize", () => {
+      setInnerWidth(window.innerWidth);
+    });
 
     return () => removeEventListener("resize", () => listener);
   }, [elements]);
+
+  useEffect(() => {
+    calColumns(columnsProps, true);
+  }, [innerWidth]);
 
   return {
     // properties

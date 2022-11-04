@@ -14,7 +14,8 @@ interface Return {
 export const useGetTopics = (): Return => {
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const { data: topics, error } = useSWRInmutable<ITopic[]>(
-    `${process.env.NEXT_PUBLIC_BASEURL_API}/topics?client_id=${process.env.NEXT_PUBLIC_UNSPLASH_ACCESS_KEY}`
+    `${process.env.NEXT_PUBLIC_BASEURL_API}/topics?client_id=${process.env.NEXT_PUBLIC_UNSPLASH_ACCESS_KEY}`,
+    { refreshInterval: 0 }
   );
 
   const router = useRouter();
