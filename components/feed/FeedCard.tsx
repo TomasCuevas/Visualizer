@@ -50,7 +50,7 @@ export const FeedCard: React.FC<IPhoto> = ({
         </NextLink>
       </header>
 
-      <NextLink href={`/photo/${id}`} passHref>
+      <NextLink prefetch={false} href={`/photo/${id}`} passHref>
         <a className="relative flex min-w-full">
           <Image
             src={small}
