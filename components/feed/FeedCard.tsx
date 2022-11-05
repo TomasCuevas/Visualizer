@@ -63,7 +63,7 @@ export const FeedCard: React.FC<IPhoto> = ({
             height="0"
             width="0"
             sizes="100%"
-            quality={isLoading ? 70 : 1}
+            quality={isLoading ? 80 : 1}
             onLoadingComplete={() => setIsLoading(true)}
           />
           <div

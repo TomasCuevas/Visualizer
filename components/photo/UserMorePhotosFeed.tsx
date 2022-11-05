@@ -16,7 +16,7 @@ export const UserMorePhotosFeed = ({ username }: { username: string }) => {
   });
 
   return (
-    <div className="border-t px-[5%] pt-5">
+    <div className="relative border-t px-[5%] pt-5">
       <span className="mx-auto block max-w-[1300px] text-lg font-light tracking-[2px] text-darklighttext">
         Mas fotos del usuario
       </span>
@@ -26,6 +26,7 @@ export const UserMorePhotosFeed = ({ username }: { username: string }) => {
           <FeedColumn key={index} photos={column} />
         ))}
       </div>
+      <div className="bg-gradient absolute bottom-0 left-0 min-h-[1000px] w-full " />
     </div>
   );
 };
