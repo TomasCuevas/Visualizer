@@ -27,7 +27,6 @@ yarn-error.log*
 package-lock.json
 
 # local env files
-.env*.local
 .env.production
 .env.development
 
