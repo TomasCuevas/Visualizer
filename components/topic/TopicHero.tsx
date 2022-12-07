@@ -1,5 +1,4 @@
-import Image from "next/future/image";
-
+//* interface *//
 interface Props {
   coverImage: string;
   description: string;
@@ -20,15 +19,10 @@ export const TopicHero: React.FC<Props> = ({
         {description.split("<")[0]}
       </p>
       <div className="absolute top-0 left-0 -z-10 h-full w-full">
-        <Image
+        <img
           src={coverImage}
           alt="topic image"
           className="h-full w-full object-cover"
-          height="0"
-          width="0"
-          sizes="100vw"
-          quality={70}
-          priority
         />
       </div>
       <div className="absolute top-0 left-0 -z-10 h-full w-full bg-gray-800/40"></div>

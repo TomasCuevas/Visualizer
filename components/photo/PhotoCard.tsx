@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import NextLink from "next/link";
-import Image from "next/future/image";
 import { saveAs } from "file-saver";
 import dayjs from "dayjs";
 import "dayjs/locale/es";
@@ -45,13 +44,10 @@ export const PhotoCard: React.FC<IPhoto> = ({
         <div className="mx-auto flex h-[60px] w-full items-center gap-2">
           <NextLink href={`https://unsplash.com/@${username}`}>
             <a target="__blank" className="flex items-center gap-2">
-              <Image
+              <img
                 src={large}
                 alt="profile image"
                 className="h-[40px] w-[40px] rounded-full"
-                height={0}
-                width={0}
-                sizes="40px"
               />
               <span className="text-base font-normal text-darklighttext">
                 {name}
@@ -62,11 +58,9 @@ export const PhotoCard: React.FC<IPhoto> = ({
             <NextLink href={`https://unsplash.com/photos/${id}`}>
               <a target="__blank" className="flex items-center gap-2">
                 <span className="hidden md:block">Ver en</span>
-                <Image
+                <img
                   src="/unsplash.svg"
                   alt="unsplash logo"
-                  width={0}
-                  height={0}
                   className="w-[80px]"
                 />
               </a>
@@ -84,7 +78,7 @@ export const PhotoCard: React.FC<IPhoto> = ({
       </header>
 
       <main className="relative z-40 w-full bg-white">
-        <Image
+        <img
           src={regular}
           alt="photo"
           className={
@@ -92,11 +86,6 @@ export const PhotoCard: React.FC<IPhoto> = ({
               ? "w-screen cursor-zoom-out object-contain xl:min-h-[calc(100vh_-_220px)]"
               : "max-h-[calc(100vh_-_220px)] w-screen cursor-zoom-in object-contain md:px-5 xl:min-h-[calc(100vh_-_220px)]"
           }
-          height="0"
-          width="0"
-          sizes="100%"
-          quality={100}
-          priority
           onClick={onSetImageFul}
         />
       </main>
@@ -114,37 +103,24 @@ export const PhotoCard: React.FC<IPhoto> = ({
         </div>
         <div className="flex flex-col gap-2">
           <span className={date ? "flex items-center gap-3" : "hidden"}>
-            <Image
+            <img
               src="/calendar.svg"
               alt="calendar"
               className="h-[22px] w-[22px]"
-              width={0}
-              height={0}
-              sizes="22px"
             />
             <span className="text-sm text-darklighttext">{`Publicado el ${date}`}</span>
           </span>
           <span className={cameraName ? "flex items-center gap-3" : "hidden"}>
-            <Image
-              src="/camera.svg"
-              alt="camera"
-              className="h-[22px] w-[22px]"
-              width={0}
-              height={0}
-              sizes="22px"
-            />
+            <img src="/camera.svg" alt="camera" className="h-[22px] w-[22px]" />
             <span className="text-sm text-darklighttext">{cameraName}</span>
           </span>
           <span
             className={location.name ? "flex items-center gap-3" : "hidden"}
           >
-            <Image
+            <img
               src="/location.svg"
               alt="camera"
               className="h-[22px] w-[22px]"
-              width={0}
-              height={0}
-              sizes="22px"
             />
             <span className="text-sm text-darklighttext">{location.name}</span>
           </span>

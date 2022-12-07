@@ -8,7 +8,7 @@ import { MdKeyboardArrowLeft, MdKeyboardArrowRight } from "react-icons/md";
 import { useGetTopics, useSlider } from "../../hooks";
 
 export const Navbar: React.FC = () => {
-  const { isLoading, topics } = useGetTopics();
+  const { topicsQuery } = useGetTopics();
   const {
     distanceToLeft,
     elementsRef,
@@ -19,15 +19,15 @@ export const Navbar: React.FC = () => {
     ulRef,
   } = useSlider();
 
-  const { query } = useRouter();
-  const { topic: topicQuery } = query;
+  const router = useRouter();
+  const { topic } = router.query;
 
   return (
-    <nav className="w-ful sticky top-[60px]  z-30 flex h-[60px] items-center justify-center overflow-hidden bg-white px-[5%] shadow-md lg:top-[70px]">
+    <nav className="w-ful sticky top-[60px] z-30 flex h-[60px] items-center justify-center overflow-hidden bg-white px-4 shadow-md lg:top-[70px]">
       <div
         className={
           showLeftArrow
-            ? "absolute left-0 z-10 ml-[5%] flex h-full w-[30px] items-center justify-center bg-white/75"
+            ? "absolute left-0 z-10 ml-4 flex h-full w-[30px] items-center justify-center bg-white/75"
             : "hidden"
         }
       >
@@ -42,13 +42,13 @@ export const Navbar: React.FC = () => {
           style={{ left: distanceToLeft }}
           className="absolute flex h-full items-center gap-5 transition-all duration-300"
         >
-          {!isLoading
-            ? topics!.map(({ title, slug, id }, index) => (
+          {!topicsQuery.isFetching || !topicsQuery.isLoading
+            ? topicsQuery.data?.map(({ title, slug, id }, index) => (
                 <li
                   ref={(element) => (elementsRef.current[index] = element)}
                   key={id}
                   className={
-                    slug === topicQuery
+                    slug === topic
                       ? "flex h-full w-full items-center border-b-2 border-black"
                       : "flex h-full w-full items-center border-b-2 border-black/0"
                   }
@@ -56,7 +56,7 @@ export const Navbar: React.FC = () => {
                   <NextLink href={`/topic/${slug}`} passHref>
                     <a
                       className={
-                        slug === topicQuery
+                        slug === topic
                           ? "whitespace-nowrap text-sm font-normal text-black"
                           : "whitespace-nowrap text-sm font-normal text-gray-400"
                       }
@@ -72,7 +72,7 @@ export const Navbar: React.FC = () => {
       <div
         className={
           showRightArrow
-            ? "absolute right-0 z-10 mr-[5%] flex h-full w-[30px] items-center justify-center bg-white/75"
+            ? "absolute right-0 z-10 mr-4 flex h-full w-[30px] items-center justify-center bg-white/75"
             : "hidden"
         }
       >
