@@ -1,46 +1,36 @@
 import { useEffect, useState } from "react";
-import useSWRInmutable from "swr/immutable";
+import { useInfiniteQuery } from "@tanstack/react-query";
+
+//* services *//
+import { getPhotosService } from "../services";
 
 //* interfaces *//
 import { IPhoto } from "../interfaces/photos";
 
-interface Return {
-  error: boolean;
-  isLoading: boolean;
-  photos: IPhoto[];
-  getNextPage: () => void;
-}
-
-export const useFetchPhotos = (): Return => {
-  const [pageIndex, setPageIndex] = useState(1);
-  const [isLoading, setIsLoading] = useState(true);
+export const useFetchPhotos = (url: string) => {
   const [photos, setPhotos] = useState<IPhoto[]>([]);
 
-  const { data, error } = useSWRInmutable<IPhoto[]>(
-    `${process.env.NEXT_PUBLIC_BASEURL_API}/photos/?client_id=${process.env.NEXT_PUBLIC_UNSPLASH_ACCESS_KEY}&page=${pageIndex}&per_page=30`,
-    { refreshInterval: 0 }
+  const photosQuery = useInfiniteQuery<IPhoto[]>(
+    [`${url}`],
+    ({ pageParam }) => getPhotosService({ pageParam, url }),
+    {
+      getNextPageParam: (lastPage, pages) => {
+        if (lastPage.length < 30) return;
+
+        return pages.length;
+      },
+      staleTime: 1000 * 60,
+    }
   );
 
-  const getNextPage = () => {
-    if (isLoading) return;
-    setPageIndex((prev) => prev + 1);
-    setIsLoading(true);
-  };
-
   useEffect(() => {
-    if (data && !error) {
-      setPhotos((prev) => [...prev, ...data.flat()]);
-      setIsLoading(false);
+    if (photosQuery.data?.pages) {
+      setPhotos(photosQuery.data.pages.flat());
     }
-  }, [data, error]);
+  }, [photosQuery.data]);
 
   return {
-    // properties
-    error,
-    isLoading,
+    photosQuery,
     photos,
-
-    // methods
-    getNextPage,
   };
 };

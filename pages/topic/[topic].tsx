@@ -7,7 +7,7 @@ import { PrincipalLayout } from "../../components/layouts";
 import { TopicFeed, TopicHero } from "../../components/topic";
 
 //* utils *//
-import { getTopics } from "../../utils";
+import { getTopicsService } from "../../services";
 
 //* interfaces *//
 interface Props {
@@ -46,7 +46,7 @@ export const getStaticPaths: GetStaticPaths = (ctx) => {
 };
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
-  const allTopics = await getTopics();
+  const allTopics = await getTopicsService();
   const { topic } = params as { topic: string };
 
   const topicData = allTopics.find(({ slug }) => slug === topic);

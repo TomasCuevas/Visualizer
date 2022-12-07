@@ -1,12 +1,16 @@
 //* hooks *//
-import { useCalcColumns, useFetchUserPhotos } from "../../hooks";
+import { useCalcColumns, useFetchPhotos } from "../../hooks";
 
 //* components *//
 import { FeedColumn } from "../feed";
 import { Loader } from "../ui";
 
-export const UserMorePhotosFeed = ({ username }: { username: string }) => {
-  const { photos, isLoading } = useFetchUserPhotos(username);
+interface Props {
+  username: string;
+}
+
+export const UserMorePhotosFeed: React.FC<Props> = ({ username }) => {
+  const { photosQuery, photos } = useFetchPhotos(`/users/${username}/photos`);
   const { columns } = useCalcColumns({
     columnsProps: [
       { columnsNumber: 2, min_width: 0 },
@@ -21,12 +25,11 @@ export const UserMorePhotosFeed = ({ username }: { username: string }) => {
         Mas fotos del usuario
       </span>
       <div className="mx-auto grid w-full max-w-[820px] grid-cols-2 gap-3 py-6 lg:max-w-[1300px] lg:grid-cols-3">
-        <Loader loading={isLoading} />
+        <Loader loading={photosQuery.isFetching} />
         {columns.map((column, index) => (
-          <FeedColumn key={index} photos={column} />
+          <FeedColumn key={index} photos={column} fetchNextPage={false} />
         ))}
       </div>
-      <div className="bg-gradient absolute bottom-0 left-0 min-h-[1000px] w-full " />
     </div>
   );
 };

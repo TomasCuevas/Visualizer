@@ -4,7 +4,7 @@ import { GetStaticProps, GetStaticPaths, NextPage } from "next";
 import { PhotoCard, UserMorePhotosFeed } from "../../components/photo";
 
 //* utils *//
-import { getPhoto } from "../../utils";
+import { getPhotoService } from "../../services";
 
 //* layout *//
 import { SecondaryLayout } from "../../components/layouts";
@@ -32,7 +32,7 @@ const PhotoPage: NextPage<Props> = ({ name, photo, username }) => {
 
 //* static side generation *//
 //* static side generation *//
-export const getStaticPaths: GetStaticPaths = async (ctx) => {
+export const getStaticPaths: GetStaticPaths = async () => {
   return {
     paths: [],
     fallback: "blocking",
@@ -42,7 +42,7 @@ export const getStaticPaths: GetStaticPaths = async (ctx) => {
 export const getStaticProps: GetStaticProps = async ({ params }) => {
   const { id } = params as { id: string };
 
-  const photo = await getPhoto(id);
+  const photo = await getPhotoService(id);
   if (!photo)
     return {
       redirect: {

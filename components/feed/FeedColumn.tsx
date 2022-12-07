@@ -11,15 +11,22 @@ import { IPhoto } from "../../interfaces/photos";
 interface Props {
   photos: IPhoto[];
   getNextPage?: any;
+  isFetching?: boolean;
+  fetchNextPage?: boolean;
 }
 
-export const FeedColumn: React.FC<Props> = ({ photos, getNextPage }) => {
+export const FeedColumn: React.FC<Props> = ({
+  photos,
+  getNextPage,
+  isFetching,
+  fetchNextPage = true,
+}) => {
   const { ref, inView } = useInView({
     threshold: 0.1,
   });
 
   useEffect(() => {
-    if (inView && getNextPage) getNextPage();
+    if (inView && getNextPage && !isFetching) getNextPage();
   }, [inView]);
 
   return (
@@ -27,12 +34,14 @@ export const FeedColumn: React.FC<Props> = ({ photos, getNextPage }) => {
       {photos.map((photo) => (
         <FeedCard key={photo.id} {...photo} />
       ))}
-      <div className="relative -z-10 w-full">
-        <div
-          ref={ref}
-          className="absolute left-0 bottom-0 h-[700px] w-full sm:h-[1000px]"
-        />
-      </div>
+      {fetchNextPage ? (
+        <div className="relative -z-10 w-full">
+          <div
+            ref={ref}
+            className="absolute left-0 bottom-0 h-[700px] w-full sm:h-[1300px]"
+          />
+        </div>
+      ) : null}
     </div>
   );
 };

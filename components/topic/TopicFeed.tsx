@@ -1,5 +1,5 @@
 //* hooks *//
-import { useCalcColumns, useFetchTopicPhotos } from "../../hooks";
+import { useCalcColumns, useFetchPhotos } from "../../hooks";
 
 //* components *//
 import { FeedColumn } from "../feed";
@@ -11,7 +11,7 @@ interface Props {
 }
 
 export const TopicFeed: React.FC<Props> = ({ topic }) => {
-  const { photos, getNextPage, isLoading } = useFetchTopicPhotos(topic);
+  const { photos, photosQuery } = useFetchPhotos(`/topics/${topic}/photos`);
   const { columns } = useCalcColumns({
     columnsProps: [
       { columnsNumber: 1, min_width: 0 },
@@ -25,10 +25,14 @@ export const TopicFeed: React.FC<Props> = ({ topic }) => {
     <>
       <section className="relative mx-auto grid w-full max-w-[820px] grid-cols-1 gap-3 px-[10px] py-6 sm:grid-cols-2 lg:max-w-[1300px] lg:grid-cols-3">
         {columns.map((column, index) => (
-          <FeedColumn key={index} photos={column} getNextPage={getNextPage} />
+          <FeedColumn
+            key={index}
+            photos={column}
+            getNextPage={photosQuery.fetchNextPage}
+          />
         ))}
       </section>
-      <Loader loading={isLoading} />
+      <Loader loading={photosQuery.isFetching} />
     </>
   );
 };

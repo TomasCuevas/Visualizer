@@ -1,69 +1,47 @@
 /* eslint-disable react-hooks/exhaustive-deps */
+import { useInfiniteQuery } from "@tanstack/react-query";
 import { useState, useEffect } from "react";
-import { useRouter } from "next/router";
-import useSWRInmutable from "swr/immutable";
+
+//* services *//
+import { getSearchPhotosService } from "../services";
 
 //* interfaces *//
 import { IPhoto } from "../interfaces/photos";
 import { ISearch } from "../interfaces/seach";
 
-//* services *//
-
-interface Return {
-  error: boolean;
-  isLoading: boolean;
-  photos: IPhoto[];
-  getNextPage: () => void;
+interface IQuery {
+  name: string;
+  value: string;
 }
 
-export const useFetchSearchPhotos = (search: string): Return => {
-  const [previousSearch, setPreviousSearch] = useState<string>("");
-  const [pageIndex, setPageIndex] = useState<number>(1);
-  const [isLoading, setIsLoading] = useState<boolean>(true);
+export const useFetchSearchPhotos = (url: string, query: IQuery) => {
   const [photos, setPhotos] = useState<IPhoto[]>([]);
 
-  const { data, error } = useSWRInmutable<ISearch>(
-    `${process.env.NEXT_PUBLIC_BASEURL_API}/search/photos/?client_id=${process.env.NEXT_PUBLIC_UNSPLASH_ACCESS_KEY}&page=${pageIndex}&per_page=30&query=${search}`,
-    { refreshInterval: 0 }
+  const photosQuery = useInfiniteQuery<ISearch>(
+    [`${url}${JSON.stringify(query)}`],
+    ({ pageParam }) => getSearchPhotosService({ pageParam, url, query }),
+    {
+      getNextPageParam: (lastPage, pages) => {
+        if (lastPage.results.length < 30) return;
+
+        return pages.length;
+      },
+      staleTime: 1000 * 60,
+    }
   );
 
-  const router = useRouter();
-
-  const getNextPage = () => {
-    if (isLoading) return;
-    setPageIndex((prev) => prev + 1);
-    setIsLoading(true);
-  };
-
   useEffect(() => {
-    if (data && !error) {
-      setPhotos((prev) => [...prev, ...data.results]);
-      setIsLoading(false);
-      return;
-    }
+    if (photosQuery.data?.pages) {
+      const allPhotos = photosQuery.data.pages
+        .map((result) => result.results)
+        .flat();
 
-    if (error) {
-      router.push("/");
+      setPhotos(allPhotos);
     }
-  }, [data]);
-
-  useEffect(() => {
-    if (previousSearch === "") {
-      return setPreviousSearch(search);
-    }
-    if (search !== previousSearch) {
-      setPreviousSearch(search);
-      return setPhotos([]);
-    }
-  }, [search]);
+  }, [photosQuery.data]);
 
   return {
-    // properties
-    error,
-    isLoading,
+    photosQuery,
     photos,
-
-    // methods
-    getNextPage,
   };
 };
