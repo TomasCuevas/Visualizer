@@ -68,17 +68,19 @@ export const useCalcColumns = ({ columnsProps, elements }: Props): Return => {
     if (elements?.length > 0) {
       calColumns(columnsProps);
     }
-
-    const listener = window.addEventListener("resize", () => {
-      setInnerWidth(window.innerWidth);
-    });
-
-    return () => removeEventListener("resize", () => listener);
   }, [elements]);
 
   useEffect(() => {
     calColumns(columnsProps, true);
   }, [innerWidth]);
+
+  useEffect(() => {
+    const listener = window.addEventListener("resize", () => {
+      setInnerWidth(window.innerWidth);
+    });
+
+    return () => removeEventListener("resize", () => listener);
+  }, []);
 
   return {
     // properties

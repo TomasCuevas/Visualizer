@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useState, useRef, useEffect } from "react";
 
 export const useSlider = () => {
@@ -8,8 +9,8 @@ export const useSlider = () => {
   const [currentElement, setCurrentElement] = useState(0);
   const [distanceToLeft, setDistanceToLeft] = useState(0);
 
-  const [showLeftArrow, setShowLeftArrow] = useState<boolean>();
-  const [showRightArrow, setShowRightArrow] = useState<boolean>();
+  const [showLeftArrow, setShowLeftArrow] = useState<boolean>(false);
+  const [showRightArrow, setShowRightArrow] = useState<boolean>(false);
 
   const moveNextElement = () => {
     setDistanceToLeft((prev) => prev - elementsWidth[currentElement] - 20);
@@ -28,7 +29,7 @@ export const useSlider = () => {
     );
 
     setElementsWidth(newElementsWidth);
-  }, [elementsRef]);
+  }, []);
 
   useEffect(() => {
     const { offsetWidth } = ulRef.current! as { offsetWidth: number };
@@ -38,15 +39,17 @@ export const useSlider = () => {
     setShowRightArrow(
       offsetWidth + distanceToLeft > window.innerWidth - padding
     );
-  }, [distanceToLeft]);
+  }, [distanceToLeft, elementsWidth]);
 
   return {
     // properties
-    distanceToLeft,
     elementsRef,
+    ulRef,
+
+    // getters
+    distanceToLeft,
     showLeftArrow,
     showRightArrow,
-    ulRef,
 
     // methods
     moveNextElement,
