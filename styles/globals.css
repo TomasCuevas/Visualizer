@@ -2,19 +2,29 @@
 @tailwind components;
 @tailwind utilities;
 
-.bg-gradient {
-  background: linear-gradient(
-    180deg,
-    rgba(255, 255, 255, 0) 0%,
-    rgba(255, 255, 255, 0.19931722689075626) 9%,
-    rgba(255, 255, 255, 0.8463760504201681) 20%,
-    rgba(255, 255, 255, 0.896796218487395) 35%,
-    rgba(255, 255, 255, 0.9528186274509804) 50%,
-    rgba(255, 255, 255, 1) 65%,
-    rgba(255, 255, 255, 1) 100%
-  );
-}
-
 * {
   box-sizing: border-box;
+}
+
+/* ===== Scrollbar CSS ===== */
+/* Firefox */
+* {
+  scrollbar-width: auto;
+  scrollbar-color: #8fccfc #ffffff;
+}
+
+/* Chrome, Edge, and Safari */
+*::-webkit-scrollbar {
+  height: 5px;
+  width: 8px;
+}
+
+*::-webkit-scrollbar-track {
+  background: #ffffff;
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: #8fccfc;
+  border-radius: 10px;
+  border: 0px solid #ffffff;
 }
