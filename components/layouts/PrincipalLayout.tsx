@@ -25,7 +25,7 @@ export const PrincipalLayout: React.FC<Props> = ({
       <Header />
       <Navbar />
 
-      <main className="w-full">{children}</main>
+      <main className="w-full bg-white">{children}</main>
     </>
   );
 };

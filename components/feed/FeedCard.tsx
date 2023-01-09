@@ -1,8 +1,19 @@
 import { useRouter } from "next/router";
 import NextLink from "next/link";
+import { motion, Variants } from "framer-motion";
 
 //* interfaces *//
 import { IPhoto } from "../../interfaces/photos";
+
+//* animation variants *//
+const articleAnimation: Variants = {
+  offscreen: { opacity: 0.5, scale: 0.8 },
+  onscreen: {
+    opacity: 1,
+    scale: [0.9, 1.1, 1],
+    transition: { duration: 0.2 },
+  },
+};
 
 export const FeedCard: React.FC<IPhoto> = ({
   id,
@@ -17,7 +28,13 @@ export const FeedCard: React.FC<IPhoto> = ({
   const isInPhotoPage = pathname.includes("/photo/[id]");
 
   return (
-    <article className="group relative flex min-w-full flex-col transition-all duration-300 sm:hover:scale-[102%]">
+    <motion.article
+      initial="offscreen"
+      whileInView="onscreen"
+      variants={articleAnimation}
+      viewport={{ once: false, amount: 0.1 }}
+      className="group relative flex min-w-full flex-col transition-all duration-300 sm:hover:scale-[102%]"
+    >
       <header
         className={
           isInPhotoPage
@@ -63,6 +80,6 @@ export const FeedCard: React.FC<IPhoto> = ({
           </div>
         </a>
       </NextLink>
-    </article>
+    </motion.article>
   );
 };

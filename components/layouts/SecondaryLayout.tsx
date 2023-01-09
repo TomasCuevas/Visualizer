@@ -24,7 +24,7 @@ export const SecondaryLayout: React.FC<Props> = ({
 
       <Header />
 
-      <main className="w-full">{children}</main>
+      <main className="w-full bg-white">{children}</main>
     </>
   );
 };

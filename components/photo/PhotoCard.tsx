@@ -1,11 +1,22 @@
 import { useState, useEffect } from "react";
 import NextLink from "next/link";
+import { motion, Variants } from "framer-motion";
 import { saveAs } from "file-saver";
 import dayjs from "dayjs";
 import "dayjs/locale/es";
 
 //* interfaces *//
 import { IPhoto } from "../../interfaces/photos";
+
+//* animation variants *//
+const imageAnimation: Variants = {
+  offscreen: { opacity: 0, scale: 0.3 },
+  onscreen: {
+    opacity: 1,
+    scale: 1,
+    transition: { duration: 0.3, ease: [0, 0.71, 0.2, 1.01] },
+  },
+};
 
 export const PhotoCard: React.FC<IPhoto> = ({
   id,
@@ -78,9 +89,14 @@ export const PhotoCard: React.FC<IPhoto> = ({
       </header>
 
       <main className="relative z-40 w-full bg-white">
-        <img
+        <motion.img
+          initial="offscreen"
+          whileInView="onscreen"
+          variants={imageAnimation}
+          viewport={{ amount: 0.01, once: false }}
           src={regular}
           alt="photo"
+          key={regular}
           className={
             imageFull
               ? "w-screen cursor-zoom-out object-contain xl:min-h-[calc(100vh_-_220px)]"
