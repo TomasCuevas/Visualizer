@@ -14,12 +14,12 @@ function MyApp({ Component, pageProps }: AppProps) {
       <ReactQueryDevtools initialIsOpen={false} />
       <Head>
         <meta
-          name="og:image"
+          property="og:image"
           content="https://user-images.githubusercontent.com/79057608/216825693-6dd15887-a4d2-4388-8dc9-27b9a7591881.png"
         />
-        <meta name="og:title" content="Visualizer" />
-        <meta name="og:image:width" content="1920" />
-        <meta name="og:image:height" content="1080" />
+        <meta property="og:title" content="Visualizer" />
+        <meta property="og:image:width" content="1920" />
+        <meta property="og:image:height" content="1080" />
         <link rel="icon" type="image/x-icon" href="/visualizer.svg" />
       </Head>
       <Component {...pageProps} />
