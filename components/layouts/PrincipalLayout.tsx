@@ -19,7 +19,6 @@ export const PrincipalLayout: React.FC<Props> = ({
       <Head>
         <title>{title}</title>
         <meta name="description" content={description} />
-        <link rel="icon" type="image/x-icon" href="/visualizer.svg"></link>
       </Head>
 
       <Header />
