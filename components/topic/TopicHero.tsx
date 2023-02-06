@@ -10,22 +10,19 @@ export const TopicHero: React.FC<Props> = ({
   description,
   title,
 }) => {
+  console.log(coverImage);
+
   return (
-    <section className="relative flex h-[230px] flex-col justify-center gap-3 overflow-hidden px-[5%] sm:h-[300px] md:h-[600px]">
-      <h3 className="text-3xl font-semibold text-white md:text-5xl md:font-bold">
+    <section
+      style={{ backgroundImage: `url('${coverImage}')` }}
+      className="relative flex h-[230px] flex-col justify-center gap-5 overflow-hidden bg-cover bg-center bg-no-repeat px-[5%] sm:h-[300px] md:h-[600px]"
+    >
+      <h3 className="text-4xl font-semibold text-white md:text-6xl md:font-bold">
         {title}
       </h3>
-      <p className="hidden max-w-[600px] text-base text-white sm:block md:text-lg md:font-medium md:leading-8">
+      <p className="hidden max-w-[600px] rounded-md bg-white/10 px-4 py-1 text-base text-white backdrop-blur-sm sm:block md:text-lg md:font-medium md:leading-8">
         {description.split("<")[0]}
       </p>
-      <div className="absolute top-0 left-0 -z-10 h-full w-full">
-        <img
-          src={coverImage}
-          alt="topic image"
-          className="h-full w-full object-cover"
-        />
-      </div>
-      <div className="absolute top-0 left-0 -z-10 h-full w-full bg-gray-800/40"></div>
     </section>
   );
 };
