@@ -22,7 +22,8 @@ const PhotoPage: NextPage<Props> = ({ name, photo, username }) => {
   return (
     <SecondaryLayout
       title={photo.description ? photo.description : `HD photo by ${name}`}
-      description="Pagina de photo"
+      description={`Descarga esta foto de ${name} en Visualizer`}
+      image={photo.urls.regular}
     >
       <PhotoCard {...photo} />
       <UserMorePhotosFeed username={username} />

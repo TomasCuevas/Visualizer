@@ -24,7 +24,11 @@ const TopicPage: NextPage<Props> = ({
   title,
 }) => {
   return (
-    <PrincipalLayout title={`${title} | Visualizer`} description={description}>
+    <PrincipalLayout
+      title={`${title} | Visualizer`}
+      description={description}
+      image={coverImage}
+    >
       <TopicHero
         coverImage={coverImage}
         description={description}

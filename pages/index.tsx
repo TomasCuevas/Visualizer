@@ -9,7 +9,7 @@ import { PrincipalLayout } from "../components/layouts";
 const Home: NextPage = () => {
   return (
     <PrincipalLayout
-      title="Home - Visualizer"
+      title="Visualizer"
       description="Pagina principal de visualizer"
     >
       <MainFeed />
