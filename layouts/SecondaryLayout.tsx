@@ -1,8 +1,9 @@
 import Head from "next/head";
 
 //* components *//
-import { Header, Navbar } from "../ui";
+import { Header } from "@/components/ui";
 
+//* interface *//
 interface Props {
   children: React.ReactNode;
   description: string;
@@ -10,7 +11,7 @@ interface Props {
   title: string;
 }
 
-export const PrincipalLayout: React.FC<Props> = ({
+export const SecondaryLayout: React.FC<Props> = ({
   children,
   description,
   image,
@@ -62,10 +63,10 @@ export const PrincipalLayout: React.FC<Props> = ({
         <meta property="og:image:type" content="image/png" />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
+        <link rel="icon" type="image/x-icon" href="/visualizer.svg"></link>
       </Head>
 
       <Header />
-      <Navbar />
 
       <main className="w-full bg-white">{children}</main>
     </>
