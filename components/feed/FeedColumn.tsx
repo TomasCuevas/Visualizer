@@ -38,7 +38,7 @@ export const FeedColumn: React.FC<Props> = ({
         <div className="relative -z-10 w-full">
           <div
             ref={ref}
-            className="absolute left-0 bottom-0 h-[700px] w-full sm:h-[1300px]"
+            className="absolute left-0 bottom-0 h-[100px] w-full sm:h-[200px]"
           />
         </div>
       ) : null}
