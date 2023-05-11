@@ -5,8 +5,8 @@ import { useInView } from "react-intersection-observer";
 //* components *//
 import { FeedCard } from "./";
 
-//* interfaces *//
-import { IPhoto } from "../../interfaces/photos";
+//* interface *//
+import { IPhoto } from "@/interfaces";
 
 interface Props {
   photos: IPhoto[];

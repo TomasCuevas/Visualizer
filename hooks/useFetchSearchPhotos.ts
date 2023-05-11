@@ -3,11 +3,10 @@ import { useInfiniteQuery } from "@tanstack/react-query";
 import { useState, useEffect } from "react";
 
 //* services *//
-import { getSearchPhotosService } from "../services";
+import { getSearchPhotosService } from "@/services";
 
 //* interfaces *//
-import { IPhoto } from "../interfaces/photos";
-import { ISearch } from "../interfaces/seach";
+import { IPhoto, ISearch } from "@/interfaces";
 
 interface IQuery {
   name: string;

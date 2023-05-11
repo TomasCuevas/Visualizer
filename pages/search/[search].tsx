@@ -1,11 +1,11 @@
 import { NextPage } from "next";
 import { useRouter } from "next/router";
 
-//* layout *//
-import { SecondaryLayout } from "../../components/layouts";
-
 //* components *//
-import { SearchFeed } from "../../components/search";
+import { SearchFeed } from "@/components/search";
+
+//* layout *//
+import { SecondaryLayout } from "@/layouts";
 
 const SearchPhotosPage: NextPage = () => {
   const router = useRouter();

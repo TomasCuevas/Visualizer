@@ -2,7 +2,7 @@ import NextLink from "next/link";
 import { useRouter } from "next/router";
 
 //* hooks *//
-import { useGetTopics } from "../../hooks";
+import { useGetTopics } from "@/hooks";
 
 export const Navbar: React.FC = () => {
   const { topicsQuery } = useGetTopics();

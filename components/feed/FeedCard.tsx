@@ -4,7 +4,7 @@ import NextLink from "next/link";
 import { Blurhash } from "react-blurhash";
 
 //* interfaces *//
-import { IPhoto } from "../../interfaces/photos";
+import { IPhoto } from "@/interfaces";
 
 export const FeedCard: React.FC<IPhoto> = ({
   id,

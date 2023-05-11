@@ -1,10 +1,10 @@
 import { useQuery } from "@tanstack/react-query";
 
 //* service *//
-import { getTopicsService } from "../services";
+import { getTopicsService } from "@/services";
 
-//* interfaces *//
-import { ITopic } from "../interfaces/topic";
+//* interface *//
+import { ITopic } from "@/interfaces";
 
 export const useGetTopics = () => {
   const topicsQuery = useQuery<ITopic[]>(["allTopics"], getTopicsService, {

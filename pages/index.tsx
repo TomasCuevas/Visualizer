@@ -1,10 +1,10 @@
 import type { NextPage } from "next";
 
 //* components *//
-import { MainFeed } from "../components/feed";
+import { MainFeed } from "@/components/feed";
 
 //* layout *//
-import { PrincipalLayout } from "../components/layouts";
+import { PrincipalLayout } from "@/layouts";
 
 const Home: NextPage = () => {
   return (

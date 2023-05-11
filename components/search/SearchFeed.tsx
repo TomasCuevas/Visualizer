@@ -1,10 +1,9 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 //* hooks *//
-import { useCalcColumns, useFetchSearchPhotos } from "../../hooks";
+import { useCalcColumns, useFetchSearchPhotos } from "@/hooks";
 
 //* components *//
-import { FeedColumn } from "../feed";
-import { Loader } from "../ui";
+import { FeedColumn } from "@/components/feed";
+import { Loader } from "@/components/ui";
 
 //* interface *//
 interface Props {

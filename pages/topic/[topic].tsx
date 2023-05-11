@@ -1,13 +1,13 @@
 import { NextPage, GetStaticProps, GetStaticPaths } from "next";
 
-//* layout *//
-import { PrincipalLayout } from "../../components/layouts";
-
 //* components *//
-import { TopicFeed, TopicHero } from "../../components/topic";
+import { TopicFeed, TopicHero } from "@/components/topic";
 
-//* utils *//
-import { getTopicsService } from "../../services";
+//* service *//
+import { getTopicsService } from "@/services";
+
+//* layout *//
+import { PrincipalLayout } from "@/layouts";
 
 //* interfaces *//
 interface Props {

@@ -2,10 +2,10 @@ import { useEffect, useState } from "react";
 import { useInfiniteQuery } from "@tanstack/react-query";
 
 //* services *//
-import { getPhotosService } from "../services";
+import { getPhotosService } from "@/services";
 
 //* interfaces *//
-import { IPhoto } from "../interfaces/photos";
+import { IPhoto } from "@/interfaces";
 
 export const useFetchPhotos = (url: string) => {
   const [photos, setPhotos] = useState<IPhoto[]>([]);

@@ -1,9 +1,9 @@
 //* components *//
-import { Loader } from "../ui";
+import { Loader } from "@/components/ui";
 import { FeedColumn } from "./";
 
 //* hooks *//
-import { useCalcColumns, useFetchPhotos } from "../../hooks";
+import { useCalcColumns, useFetchPhotos } from "@/hooks";
 
 export const MainFeed: React.FC = () => {
   const { photosQuery, photos } = useFetchPhotos("/photos");

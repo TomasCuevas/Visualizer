@@ -1,1 +1,1 @@
-export * from "./unsplashApi";
+export { default as unsplashApi } from "./unsplashApi";

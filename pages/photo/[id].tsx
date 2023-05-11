@@ -1,16 +1,16 @@
 import { GetStaticProps, GetStaticPaths, NextPage } from "next";
 
 //* components *//
-import { PhotoCard, UserMorePhotosFeed } from "../../components/photo";
+import { PhotoCard, UserMorePhotosFeed } from "@/components/photo";
 
-//* utils *//
-import { getPhotoService } from "../../services";
+//* service *//
+import { getPhotoService } from "@/services";
 
 //* layout *//
-import { SecondaryLayout } from "../../components/layouts";
+import { SecondaryLayout } from "@/layouts";
 
 //* intefaces *//
-import { IPhoto } from "../../interfaces/photos";
+import { IPhoto } from "@/interfaces";
 
 interface Props {
   name: string;

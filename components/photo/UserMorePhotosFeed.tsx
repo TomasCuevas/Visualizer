@@ -1,10 +1,11 @@
-//* hooks *//
-import { useCalcColumns, useFetchPhotos } from "../../hooks";
-
 //* components *//
-import { FeedColumn } from "../feed";
-import { Loader } from "../ui";
+import { FeedColumn } from "@/components/feed";
+import { Loader } from "@/components/ui";
 
+//* hooks *//
+import { useCalcColumns, useFetchPhotos } from "@/hooks";
+
+//* interface *//
 interface Props {
   username: string;
 }

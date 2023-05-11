@@ -5,8 +5,8 @@ import { saveAs } from "file-saver";
 import dayjs from "dayjs";
 import "dayjs/locale/es";
 
-//* interfaces *//
-import { IPhoto } from "../../interfaces/photos";
+//* interface *//
+import { IPhoto } from "@/interfaces";
 
 //* animation variants *//
 const imageAnimation: Variants = {
