@@ -11,7 +11,7 @@ import { getTopicsService } from "../../services";
 
 //* interfaces *//
 interface Props {
-  coverImage: string;
+  coverImage: { image: string; blur_hash: string };
   description: string;
   slug: string;
   title: string;
@@ -27,7 +27,7 @@ const TopicPage: NextPage<Props> = ({
     <PrincipalLayout
       title={`${title} | Visualizer`}
       description={description}
-      image={coverImage}
+      image={coverImage.image}
     >
       <TopicHero
         coverImage={coverImage}
@@ -65,7 +65,10 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 
   return {
     props: {
-      coverImage: topicData.cover_photo.urls.regular,
+      coverImage: {
+        image: topicData.cover_photo.urls.regular,
+        blur_hash: topicData.cover_photo.blur_hash,
+      },
       description: topicData.description,
       slug: topicData.slug,
       title: topicData.title,
