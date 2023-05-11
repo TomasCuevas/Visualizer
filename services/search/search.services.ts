@@ -1,8 +1,8 @@
 //* axios *//
-import unsplashApi from "../axios/unsplashApi";
+import { unsplashApi } from "@/axios";
 
-//* interface *//
-import { ISearch } from "../interfaces/seach";
+//* interfaces *//
+import { ISearch } from "@/interfaces";
 
 interface Props {
   pageParam?: number;
@@ -13,6 +13,7 @@ interface Props {
   };
 }
 
+//! get search photos [service]
 export const getSearchPhotosService = async ({
   pageParam = 0,
   url,
