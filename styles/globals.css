@@ -10,20 +10,21 @@
 /* Firefox */
 * {
   scrollbar-width: auto;
-  scrollbar-color: #8fccfc #ffffff;
+  scrollbar-color: #8fccfc #fff;
 }
 
 /* Chrome, Edge, and Safari */
 *::-webkit-scrollbar {
   height: 5px;
-  width: 8px;
+  width: 12px;
 }
 
 *::-webkit-scrollbar-track {
-  background: #ffffff;
+  background: #fff;
 }
 
 *::-webkit-scrollbar-thumb {
   background-color: #8fccfc;
-  border: 0px solid #ffffff;
+  border-radius: 200px;
+  border: 2px solid #fff;
 }
