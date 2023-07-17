@@ -24,7 +24,7 @@ export const getPhotoService = async (id: string): Promise<IPhoto | false> => {
 
 //! get photos [service]
 export const getPhotosService = async ({
-  pageParam = 0,
+  pageParam = 1,
   url,
 }: {
   pageParam?: number;

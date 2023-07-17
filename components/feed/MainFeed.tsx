@@ -1,30 +1,35 @@
-//* components *//
-import { Loader } from "@/components/ui";
-import { FeedColumn } from "./";
+import { useEffect, useState } from "react";
+import { useMediaQuery } from "react-responsive";
 
-//* hooks *//
-import { useCalcColumns, useFetchPhotos } from "@/hooks";
+//* COMPONENTS *//
+import { FeedColumn } from "@/components/feed";
+import { Loader } from "@/components/ui";
+
+//* HOOK *//
+import { useFetchPhotos } from "@/hooks";
 
 export const MainFeed: React.FC = () => {
   const { photosQuery, photos } = useFetchPhotos("/photos");
-  const { columns } = useCalcColumns({
-    columnsProps: [
-      { columnsNumber: 1, min_width: 0 },
-      { columnsNumber: 2, min_width: 640 },
-      { columnsNumber: 3, min_width: 1024 },
-    ],
-    elements: photos,
-  });
+
+  const isMobile = useMediaQuery({ maxWidth: 639 });
+  const isTablet = useMediaQuery({ minWidth: 640, maxWidth: 1024 });
+  const [columnCount, setcolumnCount] = useState(3);
+
+  useEffect(() => {
+    setcolumnCount(isMobile ? 1 : isTablet ? 2 : 3);
+  }, [isMobile, isTablet]);
 
   return (
     <>
       <section className="relative mx-auto mb-10 grid w-full max-w-[900px] grid-cols-1 gap-3 px-[5%] py-6 sm:grid-cols-2 lg:max-w-[1500px] lg:grid-cols-3">
-        {columns.map((column, index) => (
+        {Array.from({ length: columnCount }).map((_, index) => (
           <FeedColumn
-            key={index}
-            photos={column}
+            key={`feed-column-${columnCount}-${index}`}
+            columnNumber={index}
             getNextPage={photosQuery.fetchNextPage}
             isFetching={photosQuery.isFetching}
+            photos={photos}
+            totalColumns={columnCount}
           />
         ))}
       </section>
