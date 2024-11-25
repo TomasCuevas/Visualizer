@@ -4,16 +4,10 @@ import { unsplashApi } from "@/axios";
 //* INTERFACE *//
 import { IPhoto } from "@/interfaces";
 
-//! GET PHOTO [SERVICE]
+//! GET PHOTO
 export const getPhotoService = async (id: string): Promise<IPhoto | false> => {
   try {
-    const params = new URLSearchParams();
-    params.append(
-      "client_id",
-      process.env.NEXT_PUBLIC_UNSPLASH_ACCESS_KEY!.toString()
-    );
-
-    const { data } = await unsplashApi.get<IPhoto>(`/photos/${id}`, { params });
+    const { data } = await unsplashApi.get<IPhoto>(`/photos/${id}`);
 
     return data;
   } catch (error) {
@@ -22,7 +16,7 @@ export const getPhotoService = async (id: string): Promise<IPhoto | false> => {
   }
 };
 
-//! GET PHOTOS [SERVICE]
+//! GET PHOTOS
 export const getPhotosService = async ({
   pageParam = 1,
   url,
@@ -31,15 +25,8 @@ export const getPhotosService = async ({
   url: string;
 }): Promise<IPhoto[]> => {
   try {
-    const params = new URLSearchParams();
-    params.append("page", pageParam.toString());
-    params.append("per_page", "30");
-    params.append(
-      "client_id",
-      process.env.NEXT_PUBLIC_UNSPLASH_ACCESS_KEY!.toString()
-    );
-
-    const { data } = await unsplashApi.get(`${url}`, { params });
+    const params = { page: pageParam.toString(), per_page: "30" };
+    const { data } = await unsplashApi.get<IPhoto[]>(`${url}`, { params });
 
     return data;
   } catch (error) {

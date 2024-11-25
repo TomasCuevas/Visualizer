@@ -1,13 +1,11 @@
-//* AXIOS INSTANCE */*
+//* AXIOS INSTANCE *//
 import { unsplashApi } from "@/axios";
 
 //* INTERFACE *//
 import { ITopic } from "@/interfaces";
 
-//! GET TOPIC [SERVICE]
-export const getTopicService = async (
-  topic: string
-): Promise<ITopic | false> => {
+//! GET TOPIC
+export const getTopicService = async (topic: string): Promise<ITopic | false> => {
   try {
     const { data } = await unsplashApi.get<ITopic>(`/topics/${topic}`);
 
@@ -18,16 +16,10 @@ export const getTopicService = async (
   }
 };
 
-//! GET TOPICS [SERVICE]
+//! GET TOPICS
 export const getTopicsService = async (): Promise<ITopic[]> => {
   try {
-    const params = new URLSearchParams();
-    params.append(
-      "client_id",
-      process.env.NEXT_PUBLIC_UNSPLASH_ACCESS_KEY!.toString()
-    );
-
-    const { data } = await unsplashApi.get<ITopic[]>(`/topics`, { params });
+    const { data } = await unsplashApi.get<ITopic[]>(`/topics`);
 
     return data;
   } catch (error) {

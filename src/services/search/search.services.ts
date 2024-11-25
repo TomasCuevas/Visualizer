@@ -13,26 +13,20 @@ interface Props {
   };
 }
 
-//! GET SEARCH PHOTOS [SERVICE]
+//! GET SEARCH PHOTOS
 export const getSearchPhotosService = async ({
   pageParam = 0,
   url,
   query,
 }: Props): Promise<ISearch> => {
   try {
-    const params = new URLSearchParams();
-    params.append("page", pageParam.toString());
-    params.append("per_page", "30");
-    params.append(
-      "client_id",
-      process.env.NEXT_PUBLIC_UNSPLASH_ACCESS_KEY!.toString()
-    );
+    const params = {
+      page: pageParam.toString(),
+      per_page: "30",
+      ...(query && { [query.name]: query.value }),
+    };
 
-    if (query) {
-      params.append(query.name, query.value);
-    }
-
-    const { data } = await unsplashApi.get(`${url}`, { params });
+    const { data } = await unsplashApi.get<ISearch>(`${url}`, { params });
 
     return data;
   } catch (error) {
