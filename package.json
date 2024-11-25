@@ -1,6 +1,6 @@
 {
   "name": "visualizer",
-  "version": "0.38.1",
+  "version": "0.38.2",
   "private": false,
   "scripts": {
     "dev": "next dev",
