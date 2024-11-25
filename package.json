@@ -1,13 +1,16 @@
 {
   "name": "visualizer",
-  "version": "0.38.3",
+  "version": "0.38.4",
   "private": false,
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "release": "standard-version"
+    "release": "standard-version",
+    "release:minor": "standard-version --release-as minor",
+    "release:major": "standard-version --release-as major",
+    "release:patch": "standard-version --release-as patch"
   },
   "dependencies": {
     "@tanstack/react-query": "4.18.0",
