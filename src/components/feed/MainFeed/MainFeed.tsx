@@ -1,22 +1,12 @@
-import { useEffect, useState } from "react";
-import { useMediaQuery } from "react-responsive";
-
 //* COMPONENTS *//
 import { FeedColumn, Loader } from "@/components";
 
 //* HOOK *//
-import { useFetchPhotos } from "@/hooks";
+import { useFetchPhotos, useResponsiveColumns } from "@/hooks";
 
 export const MainFeed: React.FC = () => {
   const { photosQuery, photos } = useFetchPhotos("/photos");
-
-  const isMobile = useMediaQuery({ maxWidth: 639 });
-  const isTablet = useMediaQuery({ minWidth: 640, maxWidth: 1024 });
-  const [columnCount, setcolumnCount] = useState(3);
-
-  useEffect(() => {
-    setcolumnCount(isMobile ? 1 : isTablet ? 2 : 3);
-  }, [isMobile, isTablet]);
+  const columnCount = useResponsiveColumns();
 
   return (
     <>
