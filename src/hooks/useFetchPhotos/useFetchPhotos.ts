@@ -7,6 +7,7 @@ import { getPhotosService } from "@/services";
 //* INTERFACE *//
 import { IPhoto } from "@/interfaces";
 
+//! USE FETCH PHOTOS
 export const useFetchPhotos = (url: string) => {
   const [photos, setPhotos] = useState<IPhoto[]>([]);
 
@@ -16,7 +17,6 @@ export const useFetchPhotos = (url: string) => {
     {
       getNextPageParam: (lastPage, pages) => {
         if (lastPage.length < 30) return;
-
         return pages.length + 1;
       },
       staleTime: 1000 * 60,

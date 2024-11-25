@@ -12,6 +12,7 @@ import { LayoutWithoutNavbar } from "@/layouts";
 //* INTERFACES *//
 import { IPhoto } from "@/interfaces";
 
+//* PROPS *//
 interface Props {
   name: string;
   photo: IPhoto;

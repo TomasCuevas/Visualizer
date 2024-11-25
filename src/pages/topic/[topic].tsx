@@ -9,7 +9,7 @@ import { getTopicsService } from "@/services";
 //* LAYOUT *//
 import { MainLayout } from "@/layouts";
 
-//* INTERFACE *//
+//* PROPS *//
 interface Props {
   coverImage: { image: string; blur_hash: string };
   description: string;
@@ -17,23 +17,10 @@ interface Props {
   title: string;
 }
 
-const TopicPage: NextPage<Props> = ({
-  coverImage,
-  description,
-  slug,
-  title,
-}) => {
+const TopicPage: NextPage<Props> = ({ coverImage, description, slug, title }) => {
   return (
-    <MainLayout
-      title={`${title} | Visualizer`}
-      description={description}
-      image={coverImage.image}
-    >
-      <TopicHero
-        coverImage={coverImage}
-        description={description}
-        title={title}
-      />
+    <MainLayout title={`${title} | Visualizer`} description={description} image={coverImage.image}>
+      <TopicHero coverImage={coverImage} description={description} title={title} />
       <TopicFeed topic={slug} />
     </MainLayout>
   );

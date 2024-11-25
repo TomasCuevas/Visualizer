@@ -12,6 +12,7 @@ interface IQuery {
   value: string;
 }
 
+//! USE FETCH SEARCH PHOTOS
 export const useFetchSearchPhotos = (url: string, query: IQuery) => {
   const [photos, setPhotos] = useState<IPhoto[]>([]);
 
@@ -30,9 +31,7 @@ export const useFetchSearchPhotos = (url: string, query: IQuery) => {
 
   useEffect(() => {
     if (photosQuery.data?.pages) {
-      const allPhotos = photosQuery.data.pages
-        .map((result) => result.results)
-        .flat();
+      const allPhotos = photosQuery.data.pages.map((result) => result.results).flat();
 
       setPhotos(allPhotos);
     }

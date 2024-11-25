@@ -11,7 +11,7 @@ export const Loader: React.FC<Props> = ({ loading }) => {
     <div
       className={
         loading
-          ? "my-5 flex h-[58px] w-full items-center justify-center animate-spin"
+          ? "my-5 flex h-[58px] w-full items-center justify-center animate-spin duration-[5000]"
           : "hidden"
       }
     >
