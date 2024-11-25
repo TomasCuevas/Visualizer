@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.38.3](https://github.com/TomasCuevas/Visualizer/compare/v0.38.2...v0.38.3) (2024-11-25)
+
+
+### Features
+
+* improve performance by adding lazy load to images ([6d1c7f2](https://github.com/TomasCuevas/Visualizer/commit/6d1c7f27c14a47a8e1aecfe8f388155efe10ed6b))
+
 ### 0.38.2 (2024-11-25)
 
 
