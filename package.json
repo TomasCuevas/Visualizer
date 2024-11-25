@@ -1,6 +1,6 @@
 {
   "name": "visualizer",
-  "version": "0.38.0",
+  "version": "0.38.1",
   "private": false,
   "scripts": {
     "dev": "next dev",
@@ -22,6 +22,7 @@
     "react-dom": "18.2.0",
     "react-icons": "4.4.0",
     "react-intersection-observer": "9.4.0",
+    "react-lazy-load-image-component": "1.6.0",
     "react-responsive": "9.0.2"
   },
   "devDependencies": {
@@ -30,6 +31,7 @@
     "@types/node": "18.8.3",
     "@types/react": "18.0.21",
     "@types/react-dom": "18.0.6",
+    "@types/react-lazy-load-image-component": "1.5.3",
     "autoprefixer": "10.4.12",
     "eslint": "8.24.0",
     "eslint-config-next": "12.3.1",
