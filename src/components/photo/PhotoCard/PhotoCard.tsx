@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import NextLink from "next/link";
+import Link from "next/link";
 import { motion } from "framer-motion";
 import { saveAs } from "file-saver";
 import dayjs from "dayjs";
@@ -46,29 +46,23 @@ export const PhotoCard: React.FC<IPhoto> = ({
     <article className="mx-auto w-full pb-3">
       <header className="sticky top-0 z-50 flex h-[60px] items-center gap-2 bg-white px-[5%] lg:h-[70px]">
         <div className="mx-auto flex h-[60px] w-full items-center gap-2">
-          <NextLink href={`https://unsplash.com/@${username}`}>
-            <a target="__blank" className="flex items-center gap-2">
-              <img
-                src={large}
-                alt="profile image"
-                className="h-[40px] w-[40px] rounded-full"
-              />
-              <span className="text-base font-normal text-darklighttext">
-                {name}
-              </span>
-            </a>
-          </NextLink>
+          <Link
+            href={`https://unsplash.com/@${username}`}
+            target="__blank"
+            className="flex items-center gap-2"
+          >
+            <img src={large} alt="profile image" className="h-[40px] w-[40px] rounded-full" />
+            <span className="text-base font-normal text-darklighttext">{name}</span>
+          </Link>
           <div className="group ml-auto hidden h-[40px] cursor-pointer items-center justify-center rounded-full border border-black py-2 px-5 xs:flex">
-            <NextLink href={`https://unsplash.com/photos/${id}`}>
-              <a target="__blank" className="flex items-center gap-2">
-                <span className="hidden md:block">Ver en</span>
-                <img
-                  src="/unsplash.svg"
-                  alt="unsplash logo"
-                  className="w-[80px]"
-                />
-              </a>
-            </NextLink>
+            <Link
+              href={`https://unsplash.com/photos/${id}`}
+              target="__blank"
+              className="flex items-center gap-2"
+            >
+              <span className="hidden md:block">Ver en</span>
+              <img src="/unsplash.svg" alt="unsplash logo" className="w-[80px]" />
+            </Link>
           </div>
           <div className="group ml-auto flex h-[40px] cursor-pointer items-center justify-center rounded-full border border-background py-2 px-5 transition-all duration-300 hover:bg-background xs:ml-0">
             <span
@@ -112,25 +106,15 @@ export const PhotoCard: React.FC<IPhoto> = ({
         </div>
         <div className="flex flex-col gap-2">
           <span className={date ? "flex items-center gap-3" : "hidden"}>
-            <img
-              src="/calendar.svg"
-              alt="calendar"
-              className="h-[22px] w-[22px]"
-            />
+            <img src="/calendar.svg" alt="calendar" className="h-[22px] w-[22px]" />
             <span className="text-sm text-darklighttext">{`Publicado el ${date}`}</span>
           </span>
           <span className={cameraName ? "flex items-center gap-3" : "hidden"}>
             <img src="/camera.svg" alt="camera" className="h-[22px] w-[22px]" />
             <span className="text-sm text-darklighttext">{cameraName}</span>
           </span>
-          <span
-            className={location.name ? "flex items-center gap-3" : "hidden"}
-          >
-            <img
-              src="/location.svg"
-              alt="camera"
-              className="h-[22px] w-[22px]"
-            />
+          <span className={location.name ? "flex items-center gap-3" : "hidden"}>
+            <img src="/location.svg" alt="camera" className="h-[22px] w-[22px]" />
             <span className="text-sm text-darklighttext">{location.name}</span>
           </span>
         </div>

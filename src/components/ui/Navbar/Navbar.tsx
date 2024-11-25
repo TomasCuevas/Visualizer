@@ -1,4 +1,4 @@
-import NextLink from "next/link";
+import Link from "next/link";
 import { useRouter } from "next/router";
 
 //* HOOK *//
@@ -24,17 +24,17 @@ export const Navbar: React.FC = () => {
                       : "flex h-full w-full items-center border-b-2 border-black/0"
                   }
                 >
-                  <NextLink href={`/topic/${slug}`} passHref>
-                    <a
-                      className={
-                        slug === topic
-                          ? "whitespace-nowrap text-sm font-normal text-black"
-                          : "whitespace-nowrap text-sm font-normal text-gray-400"
-                      }
-                    >
-                      {title}
-                    </a>
-                  </NextLink>
+                  <Link
+                    href={`/topic/${slug}`}
+                    passHref
+                    className={
+                      slug === topic
+                        ? "whitespace-nowrap text-sm font-normal text-black"
+                        : "whitespace-nowrap text-sm font-normal text-gray-400"
+                    }
+                  >
+                    {title}
+                  </Link>
                 </li>
               ))
             : null}
