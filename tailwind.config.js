@@ -8,12 +8,12 @@ module.exports = {
     extend: {
       colors: {
         background: "#8fccfc",
-        lighttext: "#feffff",
-        darktext: "#181919",
-        darklighttext: "#514f52",
-        decoratelight: "#feffff",
-        decoratedark: "#181919",
-        decoratedarklight: "#514f52",
+        "light-text": "#feffff",
+        "dark-text": "#181919",
+        "dark-light-text": "#514f52",
+        "decorate-light": "#feffff",
+        "decorate-dark": "#181919",
+        "decorate-dark-light": "#514f52",
       },
       screens: {
         xs: "500px",

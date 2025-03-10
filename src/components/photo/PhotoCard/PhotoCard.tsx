@@ -52,7 +52,7 @@ export const PhotoCard: React.FC<IPhoto> = ({
             className="flex items-center gap-2"
           >
             <img src={large} alt="profile image" className="h-[40px] w-[40px] rounded-full" />
-            <span className="text-base font-normal text-darklighttext">{name}</span>
+            <span className="text-base font-normal text-dark-light-text">{name}</span>
           </Link>
           <div className="group ml-auto hidden h-[40px] cursor-pointer items-center justify-center rounded-full border border-black py-2 px-5 xs:flex">
             <Link
@@ -66,7 +66,7 @@ export const PhotoCard: React.FC<IPhoto> = ({
           </div>
           <div className="group ml-auto flex h-[40px] cursor-pointer items-center justify-center rounded-full border border-background py-2 px-5 transition-all duration-300 hover:bg-background xs:ml-0">
             <span
-              className="text-background transition-all duration-300 group-hover:text-lighttext"
+              className="text-background transition-all duration-300 group-hover:text-light-text"
               onClick={() => saveAs(full, name)}
             >
               Descargar
@@ -107,15 +107,15 @@ export const PhotoCard: React.FC<IPhoto> = ({
         <div className="flex flex-col gap-2">
           <span className={date ? "flex items-center gap-3" : "hidden"}>
             <img src="/calendar.svg" alt="calendar" className="h-[22px] w-[22px]" />
-            <span className="text-sm text-darklighttext">{`Publicado el ${date}`}</span>
+            <span className="text-sm text-dark-light-text">{`Publicado el ${date}`}</span>
           </span>
           <span className={cameraName ? "flex items-center gap-3" : "hidden"}>
             <img src="/camera.svg" alt="camera" className="h-[22px] w-[22px]" />
-            <span className="text-sm text-darklighttext">{cameraName}</span>
+            <span className="text-sm text-dark-light-text">{cameraName}</span>
           </span>
           <span className={location.name ? "flex items-center gap-3" : "hidden"}>
             <img src="/location.svg" alt="camera" className="h-[22px] w-[22px]" />
-            <span className="text-sm text-darklighttext">{location.name}</span>
+            <span className="text-sm text-dark-light-text">{location.name}</span>
           </span>
         </div>
       </footer>

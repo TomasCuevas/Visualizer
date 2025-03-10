@@ -24,12 +24,12 @@ export const FormSearch: React.FC = () => {
 
   return (
     <form
-      className="flex h-[35px] w-full items-center gap-3 rounded-full bg-decoratelight px-5 sm:h-[40px]"
+      className="flex h-[35px] w-full items-center gap-3 rounded-full bg-decorate-light px-5 sm:h-[40px]"
       autoComplete="off"
       onSubmit={onSearch}
     >
       <button type="submit">
-        <BsSearch className="h-5 w-5 text-darklighttext" />
+        <BsSearch className="h-5 w-5 text-dark-light-text" />
       </button>
       <input
         type="text"

@@ -40,7 +40,7 @@ export const FeedCard: React.FC<IPhoto> = ({
             effect="blur"
             threshold={100}
           />
-          <span className={"text-base font-normal text-darklighttext sm:text-lg sm:text-lighttext"}>
+          <span className={"text-base font-normal text-dark-light-text sm:text-lg sm:text-light-text"}>
             {name}
           </span>
         </Link>

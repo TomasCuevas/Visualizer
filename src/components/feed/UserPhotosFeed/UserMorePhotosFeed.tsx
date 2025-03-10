@@ -25,7 +25,7 @@ export const UserMorePhotosFeed: React.FC<Props> = ({ username }) => {
 
   return (
     <div className="relative border-t px-[5%] pt-5">
-      <span className="mx-auto block max-w-[1300px] text-lg font-light tracking-[2px] text-darklighttext">
+      <span className="mx-auto block max-w-[1300px] text-lg font-light tracking-[2px] text-dark-light-text">
         Mas fotos del usuario
       </span>
       <div className="mx-auto grid w-full max-w-[820px] grid-cols-2 gap-3 py-6 lg:max-w-[1300px] lg:grid-cols-3 overflow-hidden">
