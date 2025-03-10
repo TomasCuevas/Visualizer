@@ -16,18 +16,16 @@ interface IQuery {
 export const useFetchSearchPhotos = (url: string, query: IQuery) => {
   const [photos, setPhotos] = useState<IPhoto[]>([]);
 
-  const photosQuery = useInfiniteQuery<ISearch>(
-    [`${url}${JSON.stringify(query)}`],
-    ({ pageParam }) => getSearchPhotosService({ pageParam, url, query }),
-    {
-      getNextPageParam: (lastPage, pages) => {
-        if (lastPage.results.length < 30) return;
-
-        return pages.length;
-      },
-      staleTime: 1000 * 60,
-    }
-  );
+  const photosQuery = useInfiniteQuery<ISearch>({
+    queryKey: [`${url}${JSON.stringify(query)}`],
+    queryFn: ({ pageParam }) => getSearchPhotosService({ pageParam: pageParam as number, url, query }),
+    initialPageParam: 1,
+    getNextPageParam: (lastPage, allPages) => {
+      if (lastPage.results.length < 30) return null;
+      return allPages.length + 1;
+    },
+    staleTime: 1000 * 60,
+  });
 
   useEffect(() => {
     if (photosQuery.data?.pages) {

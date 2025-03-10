@@ -22,6 +22,11 @@ export const SearchFeed: React.FC<Props> = ({ search }) => {
   const isTablet = useMediaQuery({ minWidth: 640, maxWidth: 1024 });
   const [columnCount, setColumnCount] = useState(3);
 
+  //! FETCH NEXT PAGE
+  function fetchNextPage() {
+    photosQuery.fetchNextPage()
+  }
+
   useEffect(() => {
     setColumnCount(isMobile ? 1 : isTablet ? 2 : 3);
   }, [isMobile, isTablet]);
@@ -33,7 +38,7 @@ export const SearchFeed: React.FC<Props> = ({ search }) => {
           <FeedColumn
             key={`feed-column-${columnCount}-${index}`}
             columnNumber={index}
-            getNextPage={photosQuery.fetchNextPage}
+            getNextPage={fetchNextPage}
             isFetching={photosQuery.isFetching}
             photos={photos}
             totalColumns={columnCount}

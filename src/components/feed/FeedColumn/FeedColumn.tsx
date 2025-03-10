@@ -1,6 +1,9 @@
 import { useEffect } from "react";
 import { useInView } from "react-intersection-observer";
-import { FetchNextPageOptions, InfiniteQueryObserverResult } from "@tanstack/react-query";
+import {
+  FetchNextPageOptions,
+  InfiniteQueryObserverResult,
+} from "@tanstack/react-query";
 
 //* COMPONENT *//
 import { FeedCard } from "@/components";
@@ -14,9 +17,7 @@ interface Props {
   isFetching?: boolean;
   photos: IPhoto[];
   totalColumns: number;
-  getNextPage?(
-    options?: FetchNextPageOptions | undefined
-  ): Promise<InfiniteQueryObserverResult<IPhoto[] | ISearch, unknown>>;
+  getNextPage(): void;
 }
 
 export const FeedColumn: React.FC<Props> = ({
@@ -40,13 +41,19 @@ export const FeedColumn: React.FC<Props> = ({
       {photos.map(
         (photo, index) =>
           index % totalColumns === columnNumber && (
-            <FeedCard key={`${columnNumber}-${photo.id}-${totalColumns}-${index}`} {...photo} />
+            <FeedCard
+              key={`${columnNumber}-${photo.id}-${totalColumns}-${index}`}
+              {...photo}
+            />
           )
       )}
 
       {fetchNextPage ? (
         <div className="relative -z-10 w-full">
-          <div ref={ref} className="absolute left-0 bottom-0 h-[100px] w-full sm:h-[200px]" />
+          <div
+            ref={ref}
+            className="absolute left-0 bottom-0 h-[100px] w-full sm:h-[200px]"
+          />
         </div>
       ) : null}
     </div>

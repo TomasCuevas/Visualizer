@@ -11,18 +11,17 @@ import { IPhoto } from "@/interfaces";
 export const useFetchPhotos = (url: string) => {
   const [photos, setPhotos] = useState<IPhoto[]>([]);
 
-  const photosQuery = useInfiniteQuery<IPhoto[]>(
-    [`${url}`],
-    ({ pageParam }) => getPhotosService({ pageParam, url }),
-    {
-      getNextPageParam: (lastPage, pages) => {
-        if (lastPage.length < 30) return;
-        return pages.length + 1;
-      },
-      staleTime: 1000 * 60,
-    }
-  );
-
+  const photosQuery = useInfiniteQuery<IPhoto[]>({
+    queryKey: [`${url}`],
+    queryFn: ({ pageParam }) => getPhotosService({ pageParam: pageParam as number, url }),
+    initialPageParam: 1,
+    getNextPageParam: (lastPage, allPages) => {
+      if (lastPage.length < 30) return null;
+      return allPages.length + 1;
+    },
+    staleTime: 1000 * 60,
+  })
+  
   useEffect(() => {
     if (photosQuery.data?.pages) {
       setPhotos(photosQuery.data.pages.flat());
