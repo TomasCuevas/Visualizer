@@ -1,11 +1,8 @@
-import { useEffect, useState } from "react";
-import { useMediaQuery } from "react-responsive";
-
 //* COMPONENTS *//
 import { FeedColumn, Loader } from "@/components";
 
 //* HOOK *//
-import { useFetchPhotos } from "@/hooks";
+import { useFetchPhotos, useResponsiveColumns } from "@/hooks";
 
 //* INTERFACE *//
 interface Props {
@@ -14,14 +11,7 @@ interface Props {
 
 export const UserMorePhotosFeed: React.FC<Props> = ({ username }) => {
   const { photosQuery, photos } = useFetchPhotos(`/users/${username}/photos`);
-
-  const isMobile = useMediaQuery({ maxWidth: 639 });
-  const isTablet = useMediaQuery({ minWidth: 640, maxWidth: 1024 });
-  const [columnCount, setColumnCount] = useState(3);
-
-  useEffect(() => {
-    setColumnCount(isMobile ? 1 : isTablet ? 2 : 3);
-  }, [isMobile, isTablet]);
+  const columnCount = useResponsiveColumns();
 
   return (
     <div className="relative border-t px-[5%] pt-5">

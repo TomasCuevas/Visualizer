@@ -1,8 +1,5 @@
-import { useState, useEffect } from "react";
-import { useMediaQuery } from "react-responsive";
-
 //* HOOK *//
-import { useFetchSearchPhotos } from "@/hooks";
+import { useFetchSearchPhotos, useResponsiveColumns } from "@/hooks";
 
 //* COMPONENTS *//
 import { FeedColumn, Loader } from "@/components";
@@ -17,19 +14,12 @@ export const SearchFeed: React.FC<Props> = ({ search }) => {
     name: "query",
     value: search,
   });
-
-  const isMobile = useMediaQuery({ maxWidth: 639 });
-  const isTablet = useMediaQuery({ minWidth: 640, maxWidth: 1024 });
-  const [columnCount, setColumnCount] = useState(3);
+  const columnCount = useResponsiveColumns();
 
   //! FETCH NEXT PAGE
   function fetchNextPage() {
-    photosQuery.fetchNextPage()
+    photosQuery.fetchNextPage();
   }
-
-  useEffect(() => {
-    setColumnCount(isMobile ? 1 : isTablet ? 2 : 3);
-  }, [isMobile, isTablet]);
 
   return (
     <>

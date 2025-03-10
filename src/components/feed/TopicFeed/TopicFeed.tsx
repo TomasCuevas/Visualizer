@@ -1,8 +1,5 @@
-import { useEffect, useState } from "react";
-import { useMediaQuery } from "react-responsive";
-
 //* HOOK *//
-import { useFetchPhotos } from "@/hooks";
+import { useFetchPhotos, useResponsiveColumns } from "@/hooks";
 
 //* COMPONENTS *//
 import { FeedColumn, Loader } from "@/components";
@@ -14,14 +11,7 @@ interface Props {
 
 export const TopicFeed: React.FC<Props> = ({ topic }) => {
   const { photos, photosQuery } = useFetchPhotos(`/topics/${topic}/photos`);
-
-  const isMobile = useMediaQuery({ maxWidth: 639 });
-  const isTablet = useMediaQuery({ minWidth: 640, maxWidth: 1024 });
-  const [columnCount, setColumnCount] = useState(3);
-
-  useEffect(() => {
-    setColumnCount(isMobile ? 1 : isTablet ? 2 : 3);
-  }, [isMobile, isTablet]);
+  const columnCount = useResponsiveColumns();
 
   return (
     <>
