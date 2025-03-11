@@ -1,7 +1,8 @@
 import { useRouter } from "next/router";
 import Link from "next/link";
-import { LazyLoadImage } from "react-lazy-load-image-component";
-import "react-lazy-load-image-component/src/effects/blur.css";
+
+//* HEROUI *//
+import { Image } from "@heroui/react";
 
 //* INTERFACE *//
 import { IPhoto } from "@/interfaces";
@@ -19,7 +20,7 @@ export const FeedCard: React.FC<IPhoto> = ({
   const isInPhotoPage = pathname.includes("/photo/[id]");
 
   return (
-    <article className="group relative flex w-full max-w-[400px] mx-auto flex-col transition-all duration-300 sm:hover:scale-[102%]">
+    <article className="group relative mx-4 mb-4 flex h-auto w-full max-w-[calc(100vw_-_32px)] break-inside-avoid flex-col transition-all duration-300 sm:mx-auto">
       <header
         className={
           isInPhotoPage
@@ -32,44 +33,45 @@ export const FeedCard: React.FC<IPhoto> = ({
           target="__blank"
           className="flex items-center gap-2"
         >
-          <LazyLoadImage
+          <Image
             src={large}
             alt="profile image"
             className="h-[30px] w-[30px] rounded-full"
-            loading="lazy"
-            effect="blur"
-            threshold={100}
           />
-          <span className={"text-base font-normal text-dark-light-text sm:text-lg sm:text-light-text"}>
+          <span
+            className={
+              "text-base font-normal text-dark-light-text sm:text-lg sm:text-light-text"
+            }
+          >
             {name}
           </span>
         </Link>
       </header>
 
-      <Link prefetch={false} href={`/photo/${id}`} className="relative flex w-full">
-        <LazyLoadImage
+      <Link
+        prefetch={false}
+        href={`/photo/${id}`}
+        className="relative flex w-full [&>*:nth-child(1)]:w-full [&>*:nth-child(1)]:!max-w-full"
+      >
+        <Image
           alt={small}
-          effect="blur"
-          threshold={100}
           src={small}
-          className="relative object-cover h-auto max-w-full transition-all duration-300 scale-100 shadow-md cursor-zoom-in rounded-2xl shadow-gray-900/50 blur-0"
+          className="relative h-auto w-full max-w-full scale-100 cursor-zoom-in rounded-2xl object-cover shadow-md shadow-gray-900/50 blur-0 duration-300"
+          isZoomed
         />
         <div
           className={
             isInPhotoPage
-              ? "absolute left-0 top-0 z-10 h-full w-full cursor-zoom-in rounded-2xl bg-black/40 opacity-0 transition-all duration-300 group-hover:opacity-100"
-              : "left-0 top-0 z-10 h-full w-full cursor-zoom-in rounded-2xl bg-black/40 opacity-0 transition-all duration-300 absolute sm:group-hover:opacity-100"
+              ? "pointer-events-none absolute left-0 top-0 z-10 h-full w-full cursor-zoom-in rounded-2xl bg-black/40 opacity-0 duration-300 group-hover:opacity-100"
+              : "pointer-events-none absolute left-0 top-0 z-10 h-full w-full cursor-zoom-in rounded-2xl bg-black/40 opacity-0 duration-300 sm:group-hover:opacity-100"
           }
         />
-        <div className="absolute z-10 flex gap-2 px-5 ml-auto transition-all duration-500 bg-white top-5 left-5 rounded-xl sm:opacity-0 sm:group-hover:opacity-100">
+        <div className="absolute left-5 top-5 z-10 ml-auto flex gap-2 rounded-xl bg-white px-5 transition-all duration-500 sm:opacity-0 sm:group-hover:opacity-100">
           <p className="text-sm">By</p>
-          <LazyLoadImage
+          <Image
             src="/unsplash.svg"
             alt="Unsplash logo"
-            className="w-[65px]"
-            loading="lazy"
-            effect="blur"
-            threshold={100}
+            className="w-[65px] rounded-none"
           />
         </div>
       </Link>

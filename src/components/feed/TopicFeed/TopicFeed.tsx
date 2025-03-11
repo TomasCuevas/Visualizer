@@ -1,8 +1,8 @@
 //* HOOK *//
-import { useFetchPhotos, useResponsiveColumns } from "@/hooks";
+import { useFetchPhotos } from "@/hooks";
 
 //* COMPONENTS *//
-import { FeedColumn, Loader } from "@/components";
+import { FeedColumns, Loader } from "@/components";
 
 //* INTERFACE *//
 interface Props {
@@ -11,22 +11,21 @@ interface Props {
 
 export const TopicFeed: React.FC<Props> = ({ topic }) => {
   const { photos, photosQuery } = useFetchPhotos(`/topics/${topic}/photos`);
-  const columnCount = useResponsiveColumns();
+
+  //! FETCH NEXT PAGE
+  function fetchNextPage() {
+    photosQuery.fetchNextPage();
+  }
 
   return (
     <>
-      <section className="relative mx-auto grid w-full max-w-[820px] grid-cols-1 gap-3 px-[10px] py-6 sm:grid-cols-2 lg:max-w-[1300px] lg:grid-cols-3">
-        {Array.from({ length: columnCount }).map((_, index) => (
-          <FeedColumn
-            key={index}
-            isFetching={photosQuery.isFetching}
-            columnNumber={index}
-            getNextPage={photosQuery.fetchNextPage}
-            photos={photos}
-            totalColumns={columnCount}
-          />
-        ))}
-      </section>
+      <FeedColumns
+        isFetching={photosQuery.isFetching}
+        fetchNextPage={photosQuery.hasNextPage}
+        getNextPage={fetchNextPage}
+        photos={photos}
+      />
+
       <Loader loading={photosQuery.isFetching} />
     </>
   );

@@ -1,8 +1,8 @@
 //* HOOK *//
-import { useFetchSearchPhotos, useResponsiveColumns } from "@/hooks";
+import { useFetchSearchPhotos } from "@/hooks";
 
 //* COMPONENTS *//
-import { FeedColumn, Loader } from "@/components";
+import { FeedColumns, Loader } from "@/components";
 
 //* INTERFACE *//
 interface Props {
@@ -14,7 +14,6 @@ export const SearchFeed: React.FC<Props> = ({ search }) => {
     name: "query",
     value: search,
   });
-  const columnCount = useResponsiveColumns();
 
   //! FETCH NEXT PAGE
   function fetchNextPage() {
@@ -23,18 +22,13 @@ export const SearchFeed: React.FC<Props> = ({ search }) => {
 
   return (
     <>
-      <section className="relative mx-auto grid w-full max-w-[820px] grid-cols-1 gap-3 px-[10px] py-6 sm:grid-cols-2 lg:max-w-[1300px] lg:grid-cols-3">
-        {Array.from({ length: columnCount }).map((_, index) => (
-          <FeedColumn
-            key={`feed-column-${columnCount}-${index}`}
-            columnNumber={index}
-            getNextPage={fetchNextPage}
-            isFetching={photosQuery.isFetching}
-            photos={photos}
-            totalColumns={columnCount}
-          />
-        ))}
-      </section>
+      <FeedColumns
+        fetchNextPage={photosQuery.hasNextPage}
+        getNextPage={fetchNextPage}
+        isFetching={photosQuery.isFetching}
+        photos={photos}
+      />
+
       <Loader loading={photosQuery.isFetching} />
     </>
   );

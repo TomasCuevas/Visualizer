@@ -8,6 +8,9 @@ import "dayjs/locale/es";
 //* ANIMATION VARIANTS *//
 import { imageVariants } from "./photoCard.variants";
 
+//* HEROUI *//
+import { Image } from "@heroui/react";
+
 //* INTERFACE *//
 import { IPhoto } from "@/interfaces";
 
@@ -51,22 +54,34 @@ export const PhotoCard: React.FC<IPhoto> = ({
             target="__blank"
             className="flex items-center gap-2"
           >
-            <img src={large} alt="profile image" className="h-[40px] w-[40px] rounded-full" />
-            <span className="text-base font-normal text-dark-light-text">{name}</span>
+            <Image
+              src={large}
+              alt="profile image"
+              className="h-[40px] w-[40px] rounded-full"
+            />
+            <span className="text-base font-normal text-dark-light-text">
+              {name}
+            </span>
           </Link>
-          <div className="group ml-auto hidden h-[40px] cursor-pointer items-center justify-center rounded-full border border-black py-2 px-5 xs:flex">
+          <div className="group ml-auto hidden h-[40px] cursor-pointer items-center justify-center rounded-full border border-black px-5 py-2 hover:bg-black xs:flex">
             <Link
               href={`https://unsplash.com/photos/${id}`}
               target="__blank"
               className="flex items-center gap-2"
             >
-              <span className="hidden md:block">Ver en</span>
-              <img src="/unsplash.svg" alt="unsplash logo" className="w-[80px]" />
+              <span className="hidden group-hover:text-white md:block">
+                Ver en
+              </span>
+              <Image
+                src="/unsplash.svg"
+                alt="unsplash logo"
+                className="mb-0.5 w-[80px] rounded-none group-hover:brightness-200 group-hover:invert"
+              />
             </Link>
           </div>
-          <div className="group ml-auto flex h-[40px] cursor-pointer items-center justify-center rounded-full border border-background py-2 px-5 transition-all duration-300 hover:bg-background xs:ml-0">
+          <div className="group ml-auto flex h-[40px] cursor-pointer items-center justify-center rounded-full border border-background px-5 py-2 hover:bg-background xs:ml-0">
             <span
-              className="text-background transition-all duration-300 group-hover:text-light-text"
+              className="text-background group-hover:text-light-text"
               onClick={() => saveAs(full, name)}
             >
               Descargar
@@ -106,16 +121,32 @@ export const PhotoCard: React.FC<IPhoto> = ({
         </div>
         <div className="flex flex-col gap-2">
           <span className={date ? "flex items-center gap-3" : "hidden"}>
-            <img src="/calendar.svg" alt="calendar" className="h-[22px] w-[22px]" />
+            <Image
+              src="/calendar.svg"
+              alt="calendar"
+              className="h-[22px] w-[22px] rounded-none"
+            />
             <span className="text-sm text-dark-light-text">{`Publicado el ${date}`}</span>
           </span>
           <span className={cameraName ? "flex items-center gap-3" : "hidden"}>
-            <img src="/camera.svg" alt="camera" className="h-[22px] w-[22px]" />
+            <Image
+              src="/camera.svg"
+              alt="camera"
+              className="h-[22px] w-[22px] rounded-none"
+            />
             <span className="text-sm text-dark-light-text">{cameraName}</span>
           </span>
-          <span className={location.name ? "flex items-center gap-3" : "hidden"}>
-            <img src="/location.svg" alt="camera" className="h-[22px] w-[22px]" />
-            <span className="text-sm text-dark-light-text">{location.name}</span>
+          <span
+            className={location.name ? "flex items-center gap-3" : "hidden"}
+          >
+            <Image
+              src="/location.svg"
+              alt="camera"
+              className="h-[22px] w-[22px] rounded-none"
+            />
+            <span className="text-sm text-dark-light-text">
+              {location.name}
+            </span>
           </span>
         </div>
       </footer>
