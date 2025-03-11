@@ -1,5 +1,7 @@
-import Link from "next/link";
 import { useRouter } from "next/router";
+
+//* HEROUI *//
+import { Link } from "@heroui/react";
 
 //* HOOK *//
 import { useGetTopics } from "@/hooks";
@@ -26,7 +28,6 @@ export const Navbar: React.FC = () => {
                 >
                   <Link
                     href={`/topic/${slug}`}
-                    passHref
                     className={
                       slug === topic
                         ? "whitespace-nowrap text-sm font-normal text-black"
