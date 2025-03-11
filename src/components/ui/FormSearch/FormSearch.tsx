@@ -1,6 +1,9 @@
 import { useState, FormEvent, useEffect } from "react";
 import { useRouter } from "next/router";
 
+//* HEROUI *//
+import { Button, Input } from "@heroui/react";
+
 //* ICONS *//
 import { BsSearch } from "react-icons/bs";
 
@@ -24,28 +27,40 @@ export const FormSearch: React.FC = () => {
 
   return (
     <form
-      className="flex h-[35px] w-full items-center gap-3 rounded-full bg-decorate-light px-5 sm:h-[40px]"
+      className="flex w-full items-center gap-2 rounded-l-xl rounded-r-xl bg-decorate-light"
       autoComplete="off"
       onSubmit={onSearch}
     >
-      <button type="submit">
+      <Button
+        type="submit"
+        className="ml-4 !size-9 min-h-0 min-w-0 rounded-full !bg-white !p-1"
+      >
         <BsSearch className="h-5 w-5 text-dark-light-text" />
-      </button>
-      <input
+      </Button>
+
+      <Input
         type="text"
         name="search"
         value={toSearch}
         placeholder="Busca gratis fotos de alta resolución"
         onChange={({ target }) => setToSearch(target.value)}
-        className="hidden w-full border-none bg-[#0000] outline-none sm:flex"
+        className="hidden w-full sm:flex"
+        size="md"
+        classNames={{
+          inputWrapper:
+            "bg-white rounded-none border-l-2 border-gray-200 rounded-r-xl",
+        }}
       />
-      <input
+
+      <Input
         type="text"
         name="search"
+        size="sm"
         value={toSearch}
         placeholder="Busca fotos"
         onChange={({ target }) => setToSearch(target.value)}
-        className="w-full border-none bg-[#0000] outline-none sm:hidden"
+        className="flex w-full sm:hidden"
+        classNames={{ inputWrapper: "!bg-white" }}
       />
     </form>
   );
